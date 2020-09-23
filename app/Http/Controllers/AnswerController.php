@@ -10,6 +10,30 @@ use App\Http\Requests\Answer\AnswerUpdateRequest;
 
 class AnswerController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/answers",
+     *     tags={"answer"},
+     *     operationId="GetAnswers",
+     *     summary="Get list of answer",
+     *     description="",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/User")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
     public function index(AnswerGetRequest $request)
     {
         $filter = [
@@ -25,6 +49,43 @@ class AnswerController extends Controller
         return APIResponse::json($records, $code);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/answers/{slug}",
+     *     tags={"answer"},
+     *     operationId="GetAnswer",
+     *     summary="Get answer by slug",
+     *     description="",
+     *     @OA\Parameter(
+     *         name="slug",
+     *         in="path",
+     *         description="Slug of answers to return",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Answer")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
     public function show(AnswerGetRequest $request)
     {
         return $this->index($request);

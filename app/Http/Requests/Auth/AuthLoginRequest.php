@@ -4,6 +4,19 @@ namespace App\Http\Requests\Auth;
 
 use App\Helpers\FormRequest;
 
+/**
+ * @OA\Schema(
+ *   schema="AuthLoginRequest",
+ *   @OA\Property(
+ *     property="username",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="password",
+ *     type="string"
+ *   )
+ * )
+ */
 class AuthLoginRequest extends FormRequest
 {
     /**

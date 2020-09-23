@@ -9,6 +9,35 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * @OA\Schema(
+ *   schema="User",
+ *   @OA\Property(
+ *     property="id",
+ *     type="int"
+ *   ),
+ *   @OA\Property(
+ *     property="first_name",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="last_name",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="username",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="email",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="bio",
+ *     type="string"
+ *   )
+ * )
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
