@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'response_time'], function () {
+Route::group(['middleware' => 'response.time'], function () {
     Route::resources([
         'answers' => 'AnswerController',
     ]);

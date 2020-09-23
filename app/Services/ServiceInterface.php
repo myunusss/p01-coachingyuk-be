@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
+
 interface ServiceInterface
 {
     public function execute($request);

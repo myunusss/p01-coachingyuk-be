@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use App\Service\ServiceInterface;
 use App\Traits\Audit;
-use App\Traits\Identifier;
 use App\Traits\Pagination;
 use Illuminate\Support\Facades\DB;
 

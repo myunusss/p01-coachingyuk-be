@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Service\AnswerService;
+namespace App\Services\AnswerService;
 
 use App\Models\Answer;
-use App\Service\ServiceInterface;
-use App\Service\DefaultService;
-use App\Models\Customer;
-use App\Models\User;
+use App\Services\ServiceInterface;
+use App\Services\DefaultService;
 
 class GetAnswer extends DefaultService implements ServiceInterface
 {

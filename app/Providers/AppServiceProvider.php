@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerService('GetAnswer', 'App\Service\AnswerService\GetAnswer');
+        $this->registerService('GetAnswer', 'App\Services\AnswerService\GetAnswer');
         //
     }
 

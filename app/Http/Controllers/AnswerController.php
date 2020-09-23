@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Helpers\APIResponse;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Answer\AnswerDestroyRequest;
 use App\Http\Requests\Answer\AnswerGetRequest;
 use App\Http\Requests\Answer\AnswerStoreRequest;
