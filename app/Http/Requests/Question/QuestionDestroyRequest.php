@@ -3,17 +3,17 @@
 namespace App\Http\Requests\Question;
 
 use App\Helpers\FormRequest;
-use App\Rules\ExistsId;
+use App\Rules\ExistsSlug;
 
 class QuestionDestroyRequest extends FormRequest
 {
     /**
-     * Add Id to request validation
+     * Add slug to request validation
      * @var $routeParametersToValidate
      * @return array
      */
 
-    protected $routeParametersToValidate = ['id' => 'question'];
+    protected $routeParametersToValidate = ['slug' => 'question'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -33,7 +33,7 @@ class QuestionDestroyRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', new ExistsId('questions')]
+            'slug' => ['required', new ExistsSlug('questions')]
         ];
     }
 

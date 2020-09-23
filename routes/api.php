@@ -16,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'response.time'], function () {
     Route::resources([
         'answers' => 'AnswerController',
+        'questions' => 'QuestionController',
+        'topics' => 'TopicController'
     ]);
 });

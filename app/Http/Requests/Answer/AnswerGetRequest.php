@@ -3,17 +3,17 @@
 namespace App\Http\Requests\Answer;
 
 use App\Helpers\FormRequest;
-use App\Rules\ExistsId;
+use App\Rules\ExistsSlug;
 
 class AnswerGetRequest extends FormRequest
 {
     /**
-     * Add Id to request validation
+     * Add slug to request validation
      * @var $routeParametersToValidate
      * @return array
      */
 
-    protected $routeParametersToValidate = ['id' => 'answer'];
+    protected $routeParametersToValidate = ['slug' => 'answer'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -33,7 +33,7 @@ class AnswerGetRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['nullable', new ExistsId('answers')]
+            'slug' => ['nullable', new ExistsSlug('answers')]
         ];
     }
 

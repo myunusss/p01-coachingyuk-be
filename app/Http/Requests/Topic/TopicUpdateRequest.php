@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Requests\Answer;
+namespace App\Http\Requests\Topic;
 
 use App\Helpers\FormRequest;
-use App\Rules\ExistsId;
 use App\Rules\ExistsSlug;
 
-class AnswerUpdateRequest extends FormRequest
+class TopicUpdateRequest extends FormRequest
 {
     /**
-     * Add slug to request validation
+     * Add Id to request validation
      * @var $routeParametersToValidate
      * @return array
      */
 
-    protected $routeParametersToValidate = ['slug' => 'answer'];
+    protected $routeParametersToValidate = ['slug' => 'topic'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -34,9 +33,9 @@ class AnswerUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'slug' => ['required', new ExistsSlug('answers')],
-            'question_id' => ['nullable', new ExistsId('questions')],
-            'content' => ['required'],
+            'slug' => ['required', new ExistsSlug('topics')],
+            'name' => ['required'],
+            'background' => ['required'],
         ];
     }
 

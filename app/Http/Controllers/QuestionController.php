@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\APIResponse;
-use App\Http\Requests\Answer\AnswerDestroyRequest;
-use App\Http\Requests\Answer\AnswerGetRequest;
-use App\Http\Requests\Answer\AnswerStoreRequest;
-use App\Http\Requests\Answer\AnswerUpdateRequest;
+use App\Http\Requests\Question\QuestionDestroyRequest;
+use App\Http\Requests\Question\QuestionGetRequest;
+use App\Http\Requests\Question\QuestionStoreRequest;
+use App\Http\Requests\Question\QuestionUpdateRequest;
 
-class AnswerController extends Controller
+class QuestionController extends Controller
 {
-    public function index(AnswerGetRequest $request)
+    public function index(QuestionGetRequest $request)
     {
         $filter = [
             'page' => $request->page ?? 1,
@@ -20,7 +20,7 @@ class AnswerController extends Controller
             'question_id' => $request->search ?? '',
             'slug' => $request->slug ?? null
         ];
-        $records = app('GetAnswer')->execute($filter);
+        $records = app('GetQuestion')->execute($filter);
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
@@ -30,23 +30,23 @@ class AnswerController extends Controller
         return $this->index($request);
     }
 
-    public function store(AnswerStoreRequest $request)
+    public function store(QuestionStoreRequest $request)
     {
-        $records = app('StoreAnswer')->execute($request->all());
+        $records = app('StoreQuestion')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
 
-    public function update(AnswerUpdateRequest $request)
+    public function update(QuestionUpdateRequest $request)
     {
-        $records = app('UpdateAnswer')->execute($request->all());
+        $records = app('UpdateQuestion')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
 
-    public function destroy(AnswerDestroyRequest $request)
+    public function destroy(QuestionDestroyRequest $request)
     {
-        $records = app('DestroyAnswer')->execute($request->all());
+        $records = app('DestroyQuestion')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }

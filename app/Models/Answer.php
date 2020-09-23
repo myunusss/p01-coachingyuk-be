@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Answer extends Model
 {
     use SoftDeletes;
+    use HasSlug;
     
     /**
      * The attributes that are mass assignable.
@@ -20,4 +23,14 @@ class Answer extends Model
         'slug',
         'content',
     ];
+    
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('content')
+            ->saveSlugsTo('slug');
+    }
 }

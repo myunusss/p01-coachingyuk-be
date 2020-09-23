@@ -1,20 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Question;
+namespace App\Http\Requests\Topic;
 
 use App\Helpers\FormRequest;
-use App\Rules\ExistsSlug;
+use App\Rules\ExistsId;
 
-class QuestionGetRequest extends FormRequest
+class TopicStoreRequest extends FormRequest
 {
-    /**
-     * Add slug to request validation
-     * @var $routeParametersToValidate
-     * @return array
-     */
-
-    protected $routeParametersToValidate = ['slug' => 'question'];
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,12 +25,15 @@ class QuestionGetRequest extends FormRequest
     public function rules()
     {
         return [
-            'slug' => ['nullable', new ExistsSlug('questions')]
+            'name' => ['required'],
+            'background' => ['required'],
         ];
     }
 
     public function messages()
     {
-        return [];
+        return [
+
+        ];
     }
 }

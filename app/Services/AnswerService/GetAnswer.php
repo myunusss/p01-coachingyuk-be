@@ -16,8 +16,8 @@ class GetAnswer extends DefaultService implements ServiceInterface
             $answer->where('question_id', $dto['question_id']);
         }
 
-        if ($dto['id'] != null) {
-            $answer->where('id', $dto['id']);
+        if ($dto['slug'] != null) {
+            $answer->where('slug', $dto['slug']);
             $data = $answer->first();
         } else {
             $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $answer->count());

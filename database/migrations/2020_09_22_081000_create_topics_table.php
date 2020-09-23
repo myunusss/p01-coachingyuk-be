@@ -15,7 +15,9 @@ class CreateTopicsTable extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->index();
+            $table->foreignId('user_id');
+            $table->string('name');
+            $table->string('slug');
             $table->string('background');
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
