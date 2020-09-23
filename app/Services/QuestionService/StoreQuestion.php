@@ -12,8 +12,8 @@ class StoreQuestion extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $question = new Question();
+        $question->user_id = Auth::user()->id;
         $question->topic_id = $dto['topic_id'];
-        $question->user_id = $dto['user_id'];
         $question->content = $dto['content'];
 
         $this->prepareAuditInsert($question);

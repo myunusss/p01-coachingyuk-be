@@ -30,7 +30,7 @@ class Topic extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('content')
+            ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
 }

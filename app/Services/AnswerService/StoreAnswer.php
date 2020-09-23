@@ -13,7 +13,7 @@ class StoreAnswer extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $answer = new Answer();
-        $answer->user_id = $dto['user_id'];
+        $answer->user_id = Auth::user()->id;
         $answer->question_id = $dto['question_id'];
         $answer->content = $dto['content'];
 

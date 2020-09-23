@@ -13,6 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerService('Login', 'App\Services\AuthService\Login');
+
         $this->registerService('GetAnswer', 'App\Services\AnswerService\GetAnswer');
         $this->registerService('StoreAnswer', 'App\Services\AnswerService\StoreAnswer');
         $this->registerService('UpdateAnswer', 'App\Services\AnswerService\UpdateAnswer');
@@ -27,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('StoreTopic', 'App\Services\TopicService\StoreTopic');
         $this->registerService('UpdateTopic', 'App\Services\TopicService\UpdateTopic');
         $this->registerService('DestroyTopic', 'App\Services\TopicService\DestroyTopic');
+
+        $this->registerService('GetUser', 'App\Services\UserService\GetUser');
+        $this->registerService('StoreUser', 'App\Services\UserService\StoreUser');
+        $this->registerService('UpdateUser', 'App\Services\UserService\UpdateUser');
+        $this->registerService('DestroyUser', 'App\Services\UserService\DestroyUser');
         //
     }
 

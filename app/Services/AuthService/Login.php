@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Service\AuthService;
+namespace App\Services\AuthService;
 
-use App\Service\ServiceInterface;
-use App\Service\DefaultService;
+use App\Services\ServiceInterface;
+use App\Services\DefaultService;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -12,27 +12,22 @@ class Login extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $user = User::where('username', $dto['username'])->orWhere('email', $dto['email'])->first();
-        $this->results['code'] = UNAUTHORIZED_CODE;
-        $this->results['status'] = UNAUTHORIZED_STATUS;
+        $user = User::where('username', $dto['username'])->first();
+
         if (empty($user)) {
-            $json['message'] = "User not found!";
-            return APIResponse::json($json, $json['code']);
+            $this->results['error'] = NOT_FOUND_CODE;
+            $this->results['message'] = 'User not found!';
+            return;
         }
-        $zones = Zone::all();
-        $selectedZone = null;
-        $min_distance = PHP_INT_MAX;
-        $address = new Address();
-        $address->name = $dto['name'];
-        $address->detail_address = $dto['detail_address'];
 
-        $this->prepareAuditInsert($address);
+        if (!Auth::attempt(['username' => $user['username'], 'password' => $dto['password']])) {
+            $this->results['error'] = UNAUTHORIZED_CODE;
+            $this->results['message'] = 'Wrong Password!';
+            return;
+        }
 
-        $address->save();
-
-        $this->results['data'] = $address;
-
-        //Isi pesan hasil proses
-        $this->results['message'] = 'Alamat berhasil ditambahkan';
+        $this->results['message'] = 'You are logged in';
+        $this->results['data'] = Auth::user();
+        $this->results['data']['token'] = $user->createToken('MyApp')->accessToken;
     }
 }

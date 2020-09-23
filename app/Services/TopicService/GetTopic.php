@@ -6,7 +6,7 @@ use App\Models\Topic;
 use App\Services\ServiceInterface;
 use App\Services\DefaultService;
 
-class Get extends DefaultService implements ServiceInterface
+class GetTopic extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {

@@ -13,6 +13,7 @@ class StoreTopic extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $topic = new Topic();
+        $topic->user_id = Auth::user()->id;
         $topic->name = $dto['name'];
         $topic->background = $dto['background'];
 
