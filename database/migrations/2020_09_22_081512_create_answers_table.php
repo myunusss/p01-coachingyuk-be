@@ -19,7 +19,7 @@ class CreateAnswersTable extends Migration
             $table->foreignId('question_id');
             $table->text('slug');
             $table->text('content');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
     }

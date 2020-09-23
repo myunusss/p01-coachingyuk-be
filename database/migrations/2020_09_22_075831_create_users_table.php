@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->text('bio');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
     }

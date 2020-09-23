@@ -17,7 +17,7 @@ class CreateUserFollowedQuestionsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('question_id');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
     }

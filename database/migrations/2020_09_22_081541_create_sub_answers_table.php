@@ -18,7 +18,7 @@ class CreateSubAnswersTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('answer_id');
             $table->text('content');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
     }

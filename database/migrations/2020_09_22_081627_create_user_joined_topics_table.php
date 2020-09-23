@@ -17,7 +17,7 @@ class CreateUserJoinedTopicsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('topic_id');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
     }

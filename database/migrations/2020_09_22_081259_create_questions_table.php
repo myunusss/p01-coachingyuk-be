@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->foreignId('user_id');
             $table->text('slug');
             $table->text('content');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
     }

@@ -17,7 +17,7 @@ class CreateTopicsTable extends Migration
             $table->id();
             $table->string('name')->index();
             $table->string('background');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
     }
