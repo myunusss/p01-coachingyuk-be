@@ -14,7 +14,7 @@ class DateTime
 
     public static function getDateTime()
     {
-        return Carbon::now()->format('Y-m-d H:i:s');
+        return Carbon::now();
     }
 
     public static function getDateTimeInt()

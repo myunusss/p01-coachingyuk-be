@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\DateTime;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -66,6 +67,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'deleted_at',
     ];
 
     public function followedQuestions()
@@ -81,5 +83,10 @@ class User extends Authenticatable
     public function joinedTopics()
     {
         return $this->hasMany('App\Models\UserJoinedTopic');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
     }
 }

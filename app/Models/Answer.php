@@ -2,11 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-
 
 /**
  * @OA\Schema(
@@ -33,9 +30,8 @@ use Spatie\Sluggable\SlugOptions;
  *   )
  * )
  */
-class Answer extends Model
+class Answer extends DefaultModel
 {
-    use SoftDeletes;
     use HasSlug;
     
     /**
