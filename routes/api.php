@@ -21,6 +21,7 @@ Route::group(['middleware' => 'response.time'], function () {
             'answers' => 'AnswerController',
             'questions' => 'QuestionController',
             'replies' => 'ReplyController',
+            'roles' => 'RoleController',
             'topics' => 'TopicController',
             'users' => 'UserController'
         ]);
