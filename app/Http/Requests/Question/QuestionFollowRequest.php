@@ -4,21 +4,18 @@ namespace App\Http\Requests\Question;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
+use App\Rules\ExistsSlug;
 
 /**
  * @OA\Schema(
- *   schema="QuestionStoreRequest",
+ *   schema="QuestionFollowRequest",
  *   @OA\Property(
- *     property="topic_id",
+ *     property="question_id",
  *     type="int"
- *   ),
- *   @OA\Property(
- *     property="content",
- *     type="string"
  *   )
  * )
  */
-class QuestionStoreRequest extends FormRequest
+class QuestionFollowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,15 +35,12 @@ class QuestionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'topic_id' => ['nullable', new ExistsId('topics')],
-            'content' => ['required'],
+            'question_id' => ['required', new ExistsId('questions')],
         ];
     }
 
     public function messages()
     {
-        return [
-
-        ];
+        return [];
     }
 }

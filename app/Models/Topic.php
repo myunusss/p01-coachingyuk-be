@@ -33,4 +33,14 @@ class Topic extends Model
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
+
+    public function joinedUsers()
+    {
+        return $this->hasMany('App\Models\UserJoinedTopic');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

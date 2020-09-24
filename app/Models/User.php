@@ -67,4 +67,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function followedQuestions()
+    {
+        return $this->hasMany('App\Models\UserFollowedQuestion');
+    }
+
+    public function helpfulAnswers()
+    {
+        return $this->hasMany('App\Models\UserHelpfulAnswer');
+    }
+
+    public function joinedTopics()
+    {
+        return $this->hasMany('App\Models\UserJoinedTopic');
+    }
 }

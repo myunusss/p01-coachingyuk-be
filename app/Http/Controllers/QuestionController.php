@@ -10,6 +10,30 @@ use App\Http\Requests\Question\QuestionUpdateRequest;
 
 class QuestionController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/questions",
+     *     tags={"Question"},
+     *     operationId="GetQuestions",
+     *     summary="Get list of questions",
+     *     description="",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Question")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
     public function index(QuestionGetRequest $request)
     {
         $filter = [
@@ -17,7 +41,7 @@ class QuestionController extends Controller
             'per_page' => $request->per_page ?? 10,
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
-            'question_id' => $request->search ?? '',
+            'topic_id' => $request->topic_id ?? '',
             'slug' => $request->slug ?? null
         ];
         $records = app('GetQuestion')->execute($filter);
@@ -25,11 +49,85 @@ class QuestionController extends Controller
         return APIResponse::json($records, $code);
     }
 
-    public function show(AnswerGetRequest $request)
+    /**
+     * @OA\Get(
+     *     path="/api/questions/{slug}",
+     *     tags={"Question"},
+     *     operationId="GetQuestion",
+     *     summary="Get question by slug",
+     *     description="",
+     *     @OA\Parameter(
+     *         name="slug",
+     *         in="path",
+     *         description="Slug of question to return",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Question")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function show(QuestionGetRequest $request)
     {
         return $this->index($request);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/questions",
+     *     tags={"Question"},
+     *     operationId="PostQuestion",
+     *     summary="Store question to system",
+     *     description="",
+     *     @OA\RequestBody(
+     *         description="Question store request object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/QuestionStoreRequest"),
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(ref="#/components/schemas/QuestionStoreRequest"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Question")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
     public function store(QuestionStoreRequest $request)
     {
         $records = app('StoreQuestion')->execute($request->all());
@@ -37,6 +135,52 @@ class QuestionController extends Controller
         return APIResponse::json($records, $code);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/questions/{slug}",
+     *     tags={"Question"},
+     *     operationId="PutQuestion",
+     *     summary="Update question in system",
+     *     description="",
+     *     @OA\Parameter(
+     *         name="slug",
+     *         in="path",
+     *         description="Slug of question to update",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Question update request object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/QuestionUpdateRequest"),
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(ref="#/components/schemas/QuestionUpdateRequest"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Question")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
     public function update(QuestionUpdateRequest $request)
     {
         $records = app('UpdateQuestion')->execute($request->all());
@@ -44,9 +188,90 @@ class QuestionController extends Controller
         return APIResponse::json($records, $code);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/questions/{slug}",
+     *     tags={"Question"},
+     *     operationId="DeleteQuestion",
+     *     summary="Delete question in system",
+     *     description="",
+     *     @OA\Parameter(
+     *         name="slug",
+     *         in="path",
+     *         description="Slug of question to update",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Question")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
     public function destroy(QuestionDestroyRequest $request)
     {
         $records = app('DestroyQuestion')->execute($request->all());
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
+        return APIResponse::json($records, $code);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/questions/follow",
+     *     tags={"Question"},
+     *     operationId="FollowQuestion",
+     *     summary="Add/Remove user's followed question in system",
+     *     description="",
+     *     @OA\RequestBody(
+     *         description="Question follow request object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/QuestionFollowRequest"),
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(ref="#/components/schemas/QuestionFollowRequest"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Question")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function follow(QuestionFollowRequest $request)
+    {
+        $records = app('FollowQuestion')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }

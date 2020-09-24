@@ -1,33 +1,22 @@
 <?php
 
-namespace App\Http\Requests\Topic;
+namespace App\Http\Requests\Question;
 
 use App\Helpers\FormRequest;
+use App\Rules\ExistsId;
 use App\Rules\ExistsSlug;
 
 /**
  * @OA\Schema(
- *   schema="TopicUpdateRequest",
+ *   schema="TopicJoinRequest",
  *   @OA\Property(
- *     property="name",
- *     type="string"
- *   ),
- *   @OA\Property(
- *     property="background",
+ *     property="topic_id",
  *     type="string"
  *   )
  * )
  */
-class TopicUpdateRequest extends FormRequest
+class TopicJoinRequest extends FormRequest
 {
-    /**
-     * Add Id to request validation
-     * @var $routeParametersToValidate
-     * @return array
-     */
-
-    protected $routeParametersToValidate = ['slug' => 'topic'];
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -46,9 +35,7 @@ class TopicUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'slug' => ['required', new ExistsSlug('topics')],
-            'name' => ['nullable'],
-            'background' => ['nullable'],
+            'topic_id' => ['required', new ExistsId('topics')],
         ];
     }
 

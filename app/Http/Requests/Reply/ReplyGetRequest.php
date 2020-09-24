@@ -1,25 +1,20 @@
 <?php
 
-namespace App\Http\Requests\Question;
+namespace App\Http\Requests\Reply;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 
-/**
- * @OA\Schema(
- *   schema="QuestionStoreRequest",
- *   @OA\Property(
- *     property="topic_id",
- *     type="int"
- *   ),
- *   @OA\Property(
- *     property="content",
- *     type="string"
- *   )
- * )
- */
-class QuestionStoreRequest extends FormRequest
+class ReplyGetRequest extends FormRequest
 {
+    /**
+     * Add id to request validation
+     * @var $routeParametersToValidate
+     * @return array
+     */
+
+    protected $routeParametersToValidate = ['id' => 'reply'];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -38,15 +33,12 @@ class QuestionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'topic_id' => ['nullable', new ExistsId('topics')],
-            'content' => ['required'],
+            'id' => ['nullable', new ExistsId('replies')]
         ];
     }
 
     public function messages()
     {
-        return [
-
-        ];
+        return [];
     }
 }

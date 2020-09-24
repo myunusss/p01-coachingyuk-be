@@ -6,6 +6,19 @@ use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 use App\Rules\ExistsSlug;
 
+/**
+ * @OA\Schema(
+ *   schema="QuestionUpdateRequest",
+ *   @OA\Property(
+ *     property="topic_id",
+ *     type="int"
+ *   ),
+ *   @OA\Property(
+ *     property="content",
+ *     type="string"
+ *   )
+ * )
+ */
 class QuestionUpdateRequest extends FormRequest
 {
     /**

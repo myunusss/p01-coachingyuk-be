@@ -5,6 +5,19 @@ namespace App\Http\Requests\Answer;
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 
+/**
+ * @OA\Schema(
+ *   schema="AnswerStoreRequest",
+ *   @OA\Property(
+ *     property="question_id",
+ *     type="int"
+ *   ),
+ *   @OA\Property(
+ *     property="content",
+ *     type="string"
+ *   )
+ * )
+ */
 class AnswerStoreRequest extends FormRequest
 {
     /**

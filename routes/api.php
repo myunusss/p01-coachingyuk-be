@@ -20,8 +20,13 @@ Route::group(['middleware' => 'response.time'], function () {
         Route::resources([
             'answers' => 'AnswerController',
             'questions' => 'QuestionController',
+            'replies' => 'ReplyController',
             'topics' => 'TopicController',
             'users' => 'UserController'
         ]);
+
+        Route::post('answers/toggle-helpful', 'AnswerController@toggleHelpful');
+        Route::post('questions/follow', 'QuestionController@follow');
+        Route::post('topics/join', 'TopicController@join');
     });
 });

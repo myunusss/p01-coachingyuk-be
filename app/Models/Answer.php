@@ -59,4 +59,19 @@ class Answer extends Model
             ->generateSlugsFrom('content')
             ->saveSlugsTo('slug');
     }
+
+    public function helpedUsers()
+    {
+        return $this->hasMany('App\Models\UserHelpfulAnswer');
+    }
+    
+    public function question()
+    {
+        return $this->belongsTo('App\Models\Question');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

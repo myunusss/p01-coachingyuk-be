@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\APIResponse;
-use App\Http\Requests\Topic\TopicDestroyRequest;
-use App\Http\Requests\Topic\TopicGetRequest;
-use App\Http\Requests\Topic\TopicStoreRequest;
-use App\Http\Requests\Topic\TopicUpdateRequest;
+use App\Http\Requests\Reply\ReplyDestroyRequest;
+use App\Http\Requests\Reply\ReplyGetRequest;
+use App\Http\Requests\Reply\repliestoreRequest;
+use App\Http\Requests\Reply\ReplyUpdateRequest;
 
-class TopicController extends Controller
+class ReplyController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/topics",
-     *     tags={"Topic"},
-     *     operationId="GetTopics",
-     *     summary="Get list of topics",
+     *     path="/api/replies",
+     *     tags={"Reply"},
+     *     operationId="GetReplies",
+     *     summary="Get list of reply",
      *     description="",
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
      *         @OA\Schema(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Topic")
+     *             @OA\Items(ref="#/components/schemas/Reply")
      *         ),
      *     ),
      *     @OA\Response(
@@ -34,31 +34,32 @@ class TopicController extends Controller
      *     }
      * )
      */
-    public function index(TopicGetRequest $request)
+    public function index(ReplyGetRequest $request)
     {
         $filter = [
             'page' => $request->page ?? 1,
             'per_page' => $request->per_page ?? 10,
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
-            'slug' => $request->slug ?? null
+            'answer_id' => $request->answer_id ?? '',
+            'id' => $request->id ?? null
         ];
-        $records = app('GetTopic')->execute($filter);
+        $records = app('GetReply')->execute($filter);
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/topics/{slug}",
-     *     tags={"Topic"},
-     *     operationId="GetTopic",
-     *     summary="Get topic by slug",
+     *     path="/api/replies/{id}",
+     *     tags={"Reply"},
+     *     operationId="GetReply",
+     *     summary="Get reply by id",
      *     description="",
      *     @OA\Parameter(
-     *         name="slug",
+     *         name="id",
      *         in="path",
-     *         description="Slug of topic to return",
+     *         description="Id of replies to return",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -67,10 +68,7 @@ class TopicController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
-     *         @OA\Schema(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Topic")
-     *         ),
+     *         @OA\Schema(ref="#/components/schemas/Reply")
      *     ),
      *     @OA\Response(
      *         response=401,
@@ -85,25 +83,25 @@ class TopicController extends Controller
      *     }
      * )
      */
-    public function show(AnswerGetRequest $request)
+    public function show(ReplyGetRequest $request)
     {
         return $this->index($request);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/topics",
-     *     tags={"Topic"},
-     *     operationId="PostTopic",
-     *     summary="Store topic to system",
+     *     path="/api/replies",
+     *     tags={"Reply"},
+     *     operationId="PostReply",
+     *     summary="Store reply to system",
      *     description="",
      *     @OA\RequestBody(
-     *         description="Topic store request object",
+     *         description="Reply store request object",
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/TopicStoreRequest"),
+     *         @OA\JsonContent(ref="#/components/schemas/ReplyStoreRequest"),
      *         @OA\MediaType(
      *             mediaType="application/x-www-form-urlencoded",
-     *             @OA\Schema(ref="#/components/schemas/TopicStoreRequest"),
+     *             @OA\Schema(ref="#/components/schemas/ReplyStoreRequest"),
      *         )
      *     ),
      *     @OA\Response(
@@ -111,7 +109,7 @@ class TopicController extends Controller
      *         description="Successful operation",
      *         @OA\Schema(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Topic")
+     *             @OA\Items(ref="#/components/schemas/Reply")
      *         ),
      *     ),
      *     @OA\Response(
@@ -127,36 +125,36 @@ class TopicController extends Controller
      *     }
      * )
      */
-    public function store(TopicStoreRequest $request)
+    public function store(repliestoreRequest $request)
     {
-        $records = app('StoreTopic')->execute($request->all());
+        $records = app('StoreReply')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
 
     /**
      * @OA\Put(
-     *     path="/api/topics/{slug}",
-     *     tags={"Topic"},
-     *     operationId="PutTopic",
-     *     summary="Update topic in system",
+     *     path="/api/replies/{id}",
+     *     tags={"Reply"},
+     *     operationId="PutReply",
+     *     summary="Update reply in system",
      *     description="",
      *     @OA\Parameter(
-     *         name="slug",
+     *         name="id",
      *         in="path",
-     *         description="Slug of topic to update",
+     *         description="Id of replies to update",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
      *         )
      *     ),
      *     @OA\RequestBody(
-     *         description="Topic update request object",
+     *         description="Reply update request object",
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/TopicUpdateRequest"),
+     *         @OA\JsonContent(ref="#/components/schemas/ReplyUpdateRequest"),
      *         @OA\MediaType(
      *             mediaType="application/x-www-form-urlencoded",
-     *             @OA\Schema(ref="#/components/schemas/TopicUpdateRequest"),
+     *             @OA\Schema(ref="#/components/schemas/ReplyUpdateRequest"),
      *         )
      *     ),
      *     @OA\Response(
@@ -164,7 +162,7 @@ class TopicController extends Controller
      *         description="Successful operation",
      *         @OA\Schema(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Topic")
+     *             @OA\Items(ref="#/components/schemas/Reply")
      *         ),
      *     ),
      *     @OA\Response(
@@ -180,24 +178,25 @@ class TopicController extends Controller
      *     }
      * )
      */
-    public function update(TopicUpdateRequest $request)
+    public function update(ReplyUpdateRequest $request)
     {
-        $records = app('UpdateTopic')->execute($request->all());
+        $records = app('UpdateReply')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
+
 
     /**
      * @OA\Delete(
-     *     path="/api/topics/{slug}",
-     *     tags={"Topic"},
-     *     operationId="DeleteTopic",
-     *     summary="Delete topic in system",
+     *     path="/api/replies/{id}",
+     *     tags={"Reply"},
+     *     operationId="DeleteReply",
+     *     summary="Delete reply in system",
      *     description="",
      *     @OA\Parameter(
-     *         name="slug",
+     *         name="id",
      *         in="path",
-     *         description="Slug of topic to update",
+     *         description="Id of replies to update",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -208,7 +207,7 @@ class TopicController extends Controller
      *         description="Successful operation",
      *         @OA\Schema(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Topic")
+     *             @OA\Items(ref="#/components/schemas/Reply")
      *         ),
      *     ),
      *     @OA\Response(
@@ -224,53 +223,9 @@ class TopicController extends Controller
      *     }
      * )
      */
-    public function destroy(TopicDestroyRequest $request)
+    public function destroy(ReplyDestroyRequest $request)
     {
-        $records = app('DestroyTopic')->execute($request->all());
-        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
-        return APIResponse::json($records, $code);
-    }
-
-    /**
-     * @OA\Post(
-     *     path="/api/topics/join",
-     *     tags={"Topic"},
-     *     operationId="JoinTopic",
-     *     summary="Add/Remove user's joined topic in system",
-     *     description="",
-     *     @OA\RequestBody(
-     *         description="Topic join request object",
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/TopicJoinRequest"),
-     *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
-     *             @OA\Schema(ref="#/components/schemas/TopicJoinRequest"),
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *         @OA\Schema(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Topic")
-     *         ),
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthorized",
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Unprocessable Entity",
-     *     ),
-     *     security={
-     *         {"bearerAuth": {}}
-     *     }
-     * )
-     */
-    public function join(TopicJoinRequest $request)
-    {
-        $records = app('JoinTopic')->execute($request->all());
+        $records = app('DestroyReply')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }

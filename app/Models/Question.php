@@ -33,4 +33,19 @@ class Question extends Model
             ->generateSlugsFrom('content')
             ->saveSlugsTo('slug');
     }
+
+    public function followingUsers()
+    {
+        return $this->hasMany('App\Models\UserFollowedQuestion');
+    }
+    
+    public function topic()
+    {
+        return $this->belongsTo('App\Models\Topic');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

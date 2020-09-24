@@ -18,4 +18,14 @@ class UserJoinedTopic extends Model
         'user_id',
         'topic_id',
     ];
+    
+    public function topic()
+    {
+        return $this->belongsTo('App\Models\Topic');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

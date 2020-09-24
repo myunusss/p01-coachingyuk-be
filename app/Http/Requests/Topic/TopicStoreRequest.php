@@ -5,6 +5,19 @@ namespace App\Http\Requests\Topic;
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 
+/**
+ * @OA\Schema(
+ *   schema="TopicStoreRequest",
+ *   @OA\Property(
+ *     property="name",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="background",
+ *     type="string"
+ *   )
+ * )
+ */
 class TopicStoreRequest extends FormRequest
 {
     /**

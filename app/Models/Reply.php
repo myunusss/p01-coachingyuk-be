@@ -19,4 +19,14 @@ class Reply extends Model
         'answer_id',
         'content',
     ];
+    
+    public function answer()
+    {
+        return $this->belongsTo('App\Models\Answer');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

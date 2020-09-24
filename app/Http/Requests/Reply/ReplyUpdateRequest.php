@@ -1,32 +1,32 @@
 <?php
 
-namespace App\Http\Requests\Topic;
+namespace App\Http\Requests\Reply;
 
 use App\Helpers\FormRequest;
-use App\Rules\ExistsSlug;
+use App\Rules\ExistsId;
 
 /**
  * @OA\Schema(
- *   schema="TopicUpdateRequest",
+ *   schema="ReplyUpdateRequest",
  *   @OA\Property(
- *     property="name",
+ *     property="answer_id",
  *     type="string"
  *   ),
  *   @OA\Property(
- *     property="background",
+ *     property="content",
  *     type="string"
  *   )
  * )
  */
-class TopicUpdateRequest extends FormRequest
+class ReplyUpdateRequest extends FormRequest
 {
     /**
-     * Add Id to request validation
+     * Add id to request validation
      * @var $routeParametersToValidate
      * @return array
      */
 
-    protected $routeParametersToValidate = ['slug' => 'topic'];
+    protected $routeParametersToValidate = ['id' => 'reply'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -46,9 +46,9 @@ class TopicUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'slug' => ['required', new ExistsSlug('topics')],
-            'name' => ['nullable'],
-            'background' => ['nullable'],
+            'id' => ['required', new ExistsId('replies')],
+            'answer_id' => ['nullable', new ExistsId('answers')],
+            'content' => ['required'],
         ];
     }
 

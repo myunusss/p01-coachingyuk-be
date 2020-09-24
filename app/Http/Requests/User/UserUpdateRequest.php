@@ -5,6 +5,35 @@ namespace App\Http\Requests\User;
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 
+/**
+ * @OA\Schema(
+ *   schema="UserUpdateRequest",
+ *   @OA\Property(
+ *     property="first_name",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="last_name",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="username",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="email",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="password",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="bio",
+ *     type="string"
+ *   )
+ * )
+ */
 class UserUpdateRequest extends FormRequest
 {
     /**
@@ -34,11 +63,11 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'id' => ['required', new ExistsId('users')],
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'username' => ['required'],
-            'email' => ['required'],
-            'password' => ['required'],
+            'first_name' => ['nullable'],
+            'last_name' => ['nullable'],
+            'username' => ['nullable'],
+            'email' => ['nullable'],
+            'password' => ['nullable'],
             'bio' => ['nullable'],
         ];
     }
