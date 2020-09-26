@@ -11,7 +11,9 @@ class Register extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
+        $role = Role::where('code', 'user')->first();
         $user = new User();
+        $user->role_id = $role->id;
         $user->first_name = $dto['first_name'];
         $user->last_name = $dto['last_name'];
         $user->username = $dto['username'];
