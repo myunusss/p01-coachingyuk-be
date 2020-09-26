@@ -34,6 +34,10 @@ use Laravel\Passport\HasApiTokens;
  *     type="string"
  *   ),
  *   @OA\Property(
+ *     property="timezone",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
  *     property="bio",
  *     type="string"
  *   )
@@ -57,6 +61,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'timezone',
         'bio',
     ];
 
