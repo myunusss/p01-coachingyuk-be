@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Services\UserService;
+namespace App\Services\AuthService;
 
 use App\Services\ServiceInterface;
 use App\Services\DefaultService;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class Register extends DefaultService implements ServiceInterface
