@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\APIResponse;
 use App\Http\Requests\Auth\AuthLoginRequest;
+use App\Http\Requests\Auth\AuthRegisterRequest;
 
 class AuthController extends Controller
 {
