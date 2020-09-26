@@ -5,6 +5,7 @@ namespace App\Services\AuthService;
 use App\Services\ServiceInterface;
 use App\Services\DefaultService;
 
+use App\Models\Role;
 use App\Models\User;
 
 class Register extends DefaultService implements ServiceInterface
