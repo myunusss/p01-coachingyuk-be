@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\AnswerService;
+namespace App\Services\QuestionService;
 
 use App\Services\ServiceInterface;
 use App\Services\DefaultService;
