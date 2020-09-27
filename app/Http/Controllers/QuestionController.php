@@ -272,7 +272,12 @@ class QuestionController extends Controller
      */
     public function follow(QuestionFollowRequest $request)
     {
-        $records = app('FollowQuestion')->execute($request->all());
+        $data = [
+            'question_id' => $request->question_id ?? null,
+            'id' => $request->id ?? null
+        ];
+
+        $records = app('FollowQuestion')->execute($data);
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }

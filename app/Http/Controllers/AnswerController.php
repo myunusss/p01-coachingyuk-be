@@ -272,7 +272,12 @@ class AnswerController extends Controller
      */
     public function toggleHelpful(AnswerToggleHelpfulRequest $request)
     {
-        $records = app('ToggleHelpfulAnswer')->execute($request->all());
+        $data = [
+            'answer_id' => $request->answer_id ?? null,
+            'id' => $request->id ?? null
+        ];
+
+        $records = app('ToggleHelpfulAnswer')->execute($data);
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }

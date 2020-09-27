@@ -273,7 +273,12 @@ class TopicController extends Controller
      */
     public function join(TopicJoinRequest $request)
     {
-        $records = app('JoinTopic')->execute($request->all());
+        $data = [
+            'topic_id' => $request->topic_id ?? null,
+            'id' => $request->id ?? null
+        ];
+
+        $records = app('JoinTopic')->execute($data);
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
