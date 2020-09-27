@@ -41,6 +41,8 @@ class TopicController extends Controller
             'per_page' => $request->per_page ?? 10,
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
+            'user_id' => $request->user_id ?? null,
+            'category_id' => $request->category_id ?? null,
             'slug' => $request->slug ?? null
         ];
         $records = app('GetTopic')->execute($filter);

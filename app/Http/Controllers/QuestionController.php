@@ -41,7 +41,7 @@ class QuestionController extends Controller
             'per_page' => $request->per_page ?? 10,
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
-            'topic_id' => $request->topic_id ?? '',
+            'topic_id' => $request->topic_id ?? null,
             'slug' => $request->slug ?? null
         ];
         $records = app('GetQuestion')->execute($filter);

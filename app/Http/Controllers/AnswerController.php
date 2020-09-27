@@ -41,7 +41,7 @@ class AnswerController extends Controller
             'per_page' => $request->per_page ?? 10,
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
-            'question_id' => $request->question_id ?? '',
+            'question_id' => $request->question_id ?? null,
             'slug' => $request->slug ?? null
         ];
         $records = app('GetAnswer')->execute($filter);

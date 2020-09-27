@@ -12,6 +12,10 @@ class GetQuestion extends DefaultService implements ServiceInterface
     {
         $question = Question::with('answers')->orderBy($dto['sort_by'], $dto['sort_dir']);
 
+        if ($dto['topic_id'] != null) {
+            $topic->where('topic_id', $dto['topic_id']);
+        }
+
         if ($dto['slug'] != null) {
             $question->where('slug', $dto['slug']);
             $data = $question->first();

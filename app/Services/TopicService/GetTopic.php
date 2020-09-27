@@ -3,6 +3,7 @@
 namespace App\Services\TopicService;
 
 use App\Models\Topic;
+use App\Models\UserJoinedTopic;
 use App\Services\ServiceInterface;
 use App\Services\DefaultService;
 
@@ -11,6 +12,15 @@ class GetTopic extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $topic = Topic::with('questions')->orderBy($dto['sort_by'], $dto['sort_dir']);
+
+        if ($dto['user_id'] != null) {
+            $topicIds = UserJoinedTopic::where('user_id', $dto['user_id'])->pluck('topic_id');
+            $topic->whereIn('id', $topicIds);
+        }
+        
+        if ($dto['category_id'] != null) {
+            $topic->where('category_id', $dto['category_id']);
+        }
 
         if ($dto['slug'] != null) {
             $topic->where('slug', $dto['slug']);
