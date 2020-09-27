@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Question;
+namespace App\Http\Requests\Topic;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
