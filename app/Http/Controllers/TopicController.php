@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\APIResponse;
 use App\Http\Requests\Topic\TopicDestroyRequest;
 use App\Http\Requests\Topic\TopicGetRequest;
+use App\Http\Requests\Topic\TopicJoinRequest;
 use App\Http\Requests\Topic\TopicStoreRequest;
 use App\Http\Requests\Topic\TopicUpdateRequest;
 

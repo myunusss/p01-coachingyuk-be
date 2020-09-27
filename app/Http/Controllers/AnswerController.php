@@ -6,6 +6,7 @@ use App\Helpers\APIResponse;
 use App\Http\Requests\Answer\AnswerDestroyRequest;
 use App\Http\Requests\Answer\AnswerGetRequest;
 use App\Http\Requests\Answer\AnswerStoreRequest;
+use App\Http\Requests\Answer\AnswerToggleHelpfulRequest;
 use App\Http\Requests\Answer\AnswerUpdateRequest;
 
 class AnswerController extends Controller

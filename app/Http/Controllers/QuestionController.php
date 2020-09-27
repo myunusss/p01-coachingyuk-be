@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\APIResponse;
 use App\Http\Requests\Question\QuestionDestroyRequest;
+use App\Http\Requests\Question\QuestionFollowRequest;
 use App\Http\Requests\Question\QuestionGetRequest;
 use App\Http\Requests\Question\QuestionStoreRequest;
 use App\Http\Requests\Question\QuestionUpdateRequest;
