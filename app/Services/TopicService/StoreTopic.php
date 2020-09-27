@@ -14,8 +14,8 @@ class StoreTopic extends DefaultService implements ServiceInterface
     {
         $topic = new Topic();
         $topic->user_id = Auth::user()->id;
+        $topic->category_id = $dto['category_id'];
         $topic->name = $dto['name'];
-        $topic->background = $dto['background'];
 
         $this->prepareAuditInsert($topic);
 

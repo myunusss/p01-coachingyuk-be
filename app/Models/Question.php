@@ -30,6 +30,11 @@ class Question extends DefaultModel
             ->generateSlugsFrom('content')
             ->saveSlugsTo('slug');
     }
+    
+    public function answers()
+    {
+        return $this->hasMany('App\Models\Answer');
+    }
 
     public function followingUsers()
     {

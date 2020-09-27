@@ -20,6 +20,7 @@ Route::group(['middleware' => 'response.time'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::resources([
             'answers' => 'AnswerController',
+            'categories' => 'CategoryController',
             'questions' => 'QuestionController',
             'replies' => 'ReplyController',
             'roles' => 'RoleController',

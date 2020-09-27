@@ -12,8 +12,8 @@ class UpdateTopic extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $topic = Topic::find($dto['id']);
-        $topic->name = $dto['name'];
-        $topic->background = $dto['background'];
+        $topic->category_id = $dto['category_id'] ?? $topic->category_id;
+        $topic->name = $dto['name'] ?? $topic->name;
 
         $this->prepareAuditUpdate($topic);
 

@@ -12,6 +12,7 @@ class UpdateUser extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $user = User::find($dto['id']);
+        $user->role_id = $dto['role_id'] ?? $user->role_id;
         $user->first_name = $dto['first_name'] ?? $user->first_name;
         $user->last_name = $dto['last_name'] ?? $user->last_name;
         $user->username = $dto['username'] ?? $user->username;

@@ -1,21 +1,29 @@
 <?php
 
-namespace App\Http\Requests\Topic;
+namespace App\Http\Requests\Category;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 
 /**
  * @OA\Schema(
- *   schema="TopicStoreRequest",
+ *   schema="CategoryUpdateRequest",
  *   @OA\Property(
  *     property="name",
  *     type="string"
- *   )
+ *   ),
  * )
  */
-class TopicStoreRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
+    /**
+     * Add Id to request validation
+     * @var $routeParametersToValidate
+     * @return array
+     */
+
+    protected $routeParametersToValidate = ['id' => 'category'];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -34,15 +42,14 @@ class TopicStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => ['required', new ExistsId('categories')],
-            'name' => ['required'],
+            'id' => ['required', new ExistsId('categories')],
+            'name' => ['nullable'],
+            'background' => ['nullable'],
         ];
     }
 
     public function messages()
     {
-        return [
-
-        ];
+        return [];
     }
 }

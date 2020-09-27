@@ -22,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('ToggleHelpfulAnswer', 'App\Services\AnswerService\ToggleHelpfulAnswer');
         $this->registerService('UpdateAnswer', 'App\Services\AnswerService\UpdateAnswer');
 
+        $this->registerService('DestroyCategory', 'App\Services\CategoryService\DestroyCategory');
+        $this->registerService('GetCategory', 'App\Services\CategoryService\GetCategory');
+        $this->registerService('StoreCategory', 'App\Services\CategoryService\StoreCategory');
+        $this->registerService('ToggleHelpfulCategory', 'App\Services\CategoryService\ToggleHelpfulCategory');
+        $this->registerService('UpdateCategory', 'App\Services\CategoryService\UpdateCategory');
+
         $this->registerService('DestroyQuestion', 'App\Services\QuestionService\DestroyQuestion');
         $this->registerService('FollowQuestion', 'App\Services\QuestionService\FollowQuestion');
         $this->registerService('GetQuestion', 'App\Services\QuestionService\GetQuestion');

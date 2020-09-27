@@ -10,10 +10,10 @@ class GetTopic extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $topic = Topic::orderBy($dto['sort_by'], $dto['sort_dir']);
+        $topic = Topic::with('questions')->orderBy($dto['sort_by'], $dto['sort_dir']);
 
-        if ($dto['id'] != null) {
-            $topic->where('id', $dto['id']);
+        if ($dto['slug'] != null) {
+            $topic->where('slug', $dto['slug']);
             $data = $topic->first();
         } else {
             $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $topic->count());

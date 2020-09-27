@@ -4,6 +4,7 @@ namespace App\Http\Requests\Topic;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsSlug;
+use App\Rules\ExistsId;
 
 /**
  * @OA\Schema(
@@ -12,10 +13,6 @@ use App\Rules\ExistsSlug;
  *     property="name",
  *     type="string"
  *   ),
- *   @OA\Property(
- *     property="background",
- *     type="string"
- *   )
  * )
  */
 class TopicUpdateRequest extends FormRequest
@@ -47,8 +44,8 @@ class TopicUpdateRequest extends FormRequest
     {
         return [
             'slug' => ['required', new ExistsSlug('topics')],
+            'category_id' => ['required', new ExistsId('categories')],
             'name' => ['nullable'],
-            'background' => ['nullable'],
         ];
     }
 

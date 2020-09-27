@@ -10,10 +10,10 @@ class GetQuestion extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $question = Question::orderBy($dto['sort_by'], $dto['sort_dir']);
+        $question = Question::with('answers')->orderBy($dto['sort_by'], $dto['sort_dir']);
 
-        if ($dto['id'] != null) {
-            $question->where('id', $dto['id']);
+        if ($dto['slug'] != null) {
+            $question->where('slug', $dto['slug']);
             $data = $question->first();
         } else {
             $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $question->count());

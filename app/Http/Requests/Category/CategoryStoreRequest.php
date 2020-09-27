@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Requests\Topic;
+namespace App\Http\Requests\Category;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 
 /**
  * @OA\Schema(
- *   schema="TopicStoreRequest",
+ *   schema="CategoryStoreRequest",
  *   @OA\Property(
  *     property="name",
  *     type="string"
  *   )
  * )
  */
-class TopicStoreRequest extends FormRequest
+class CategoryStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,8 +34,8 @@ class TopicStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => ['required', new ExistsId('categories')],
             'name' => ['required'],
+            'background' => ['required'],
         ];
     }
 

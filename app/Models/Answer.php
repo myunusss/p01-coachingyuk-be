@@ -66,6 +66,11 @@ class Answer extends DefaultModel
         return $this->belongsTo('App\Models\Question');
     }
     
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply');
+    }
+    
     public function user()
     {
         return $this->belongsTo('App\Models\User');
