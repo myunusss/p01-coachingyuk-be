@@ -10,7 +10,7 @@ class GetReply extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $replies = Reply::orderBy($dto['sort_by'], $dto['sort_dir']);
+        $replies = Reply::with(['answer'])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['id'] != null) {
             $replies->where('id', $dto['id']);
