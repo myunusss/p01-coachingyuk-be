@@ -12,7 +12,7 @@ class Login extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $user = User::with('role')->where('username', $dto['username'])->first();
+        $user = User::with('role')->where('username', $dto['username'])->where('email', $dto['email'])->first();
 
         if (empty($user)) {
             $this->results['error'] = NOT_FOUND_CODE;
@@ -20,7 +20,8 @@ class Login extends DefaultService implements ServiceInterface
             return;
         }
 
-        if (!Auth::attempt(['username' => $user['username'], 'password' => $dto['password']])) {
+        if (!Auth::attempt(['username' => $user['username'], 'password' => $dto['password']]) &&
+			!Auth::attempt(['email' => $user['email'], 'password' => $dto['password']])) {
             $this->results['error'] = UNAUTHORIZED_CODE;
             $this->results['message'] = 'Wrong Password!';
             return;
