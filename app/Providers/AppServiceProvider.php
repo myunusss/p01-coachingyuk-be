@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->registerService('Login', 'App\Services\AuthService\Login');
         $this->registerService('Register', 'App\Services\AuthService\Register');
+        $this->registerService('ProviderLogin', 'App\Services\AuthService\ProviderLogin');
 
         $this->registerService('DestroyAnswer', 'App\Services\AnswerService\DestroyAnswer');
         $this->registerService('GetAnswer', 'App\Services\AnswerService\GetAnswer');

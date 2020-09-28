@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'response.time'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('register', 'AuthController@register');
+    Route::get('login/{provider}', 'AuthController@redirectToProvider');
+    Route::get('login/{provider}/callback', 'AuthController@handleProviderCallback');
     
     Route::group(['middleware' => 'auth:api'], function () {
         Route::resources([

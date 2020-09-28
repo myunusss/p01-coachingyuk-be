@@ -63,6 +63,8 @@ class User extends Authenticatable
         'password',
         'timezone',
         'bio',
+        'provider',
+        'provider_id',
     ];
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\APIResponse;
 use App\Http\Requests\Auth\AuthLoginRequest;
 use App\Http\Requests\Auth\AuthRegisterRequest;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -88,5 +89,80 @@ class AuthController extends Controller
         $records = app('Register')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = UNAUTHORIZED_CODE;
         return APIResponse::json($records, $code);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/login/{provider}",
+     *     tags={"Auth"},
+     *     operationId="authProviderLogin",
+     *     summary="Authenticate user to system via provider",
+     *     description="",
+     *     @OA\Parameter(
+     *         name="provider",
+     *         in="path",
+     *         description="Provider used to authenticate",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/User")
+     *         ),
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/login/{provider}/callback",
+     *     tags={"Auth"},
+     *     operationId="authProviderLoginCallback",
+     *     summary="Callback to authenticate user to system from provider",
+     *     description="",
+     *     @OA\Parameter(
+     *         name="provider",
+     *         in="path",
+     *         description="Provider used to authenticate",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/User")
+     *         ),
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+        $data = [
+            'user' => $user,
+            'provider' => $provider
+        ];
+
+        $records = app('ProviderLogin')->execute($data);
+        return redirect(env('WEB_CALLBACK') . '?token=' . $records['data']['token']);
     }
 }
