@@ -10,10 +10,10 @@ class GetQuestion extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $question = Question::with('topic', 'answers')->orderBy($dto['sort_by'], $dto['sort_dir']);
+        $question = Question::with('topic', 'user', 'answers')->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['topic_id'] != null) {
-            $topic->where('topic_id', $dto['topic_id']);
+            $question->where('topic_id', $dto['topic_id']);
         }
 
         if ($dto['slug'] != null) {

@@ -10,7 +10,7 @@ class GetAnswer extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $answer = Answer::with('question', 'replies')->orderBy($dto['sort_by'], $dto['sort_dir']);
+        $answer = Answer::with('question', 'user', 'replies')->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['question_id'] != null) {
             $answer->where('question_id', $dto['question_id']);
