@@ -315,6 +315,68 @@
                 }
             }
         },
+        "/api/login/{provider}": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authenticate user to system via provider",
+                "description": "",
+                "operationId": "authProviderLogin",
+                "parameters": [
+                    {
+                        "name": "provider",
+                        "in": "path",
+                        "description": "Provider used to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/login/{provider}/callback": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Callback to authenticate user to system from provider",
+                "description": "",
+                "operationId": "authProviderLoginCallback",
+                "parameters": [
+                    {
+                        "name": "provider",
+                        "in": "path",
+                        "description": "Provider used to authenticate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/categories": {
             "get": {
                 "tags": [
@@ -1684,6 +1746,9 @@
                 "properties": {
                     "name": {
                         "type": "string"
+                    },
+                    "background": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -1691,6 +1756,9 @@
             "TopicUpdateRequest": {
                 "properties": {
                     "name": {
+                        "type": "string"
+                    },
+                    "background": {
                         "type": "string"
                     }
                 },
