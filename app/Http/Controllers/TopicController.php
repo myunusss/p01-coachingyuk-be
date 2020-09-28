@@ -88,7 +88,7 @@ class TopicController extends Controller
      *     }
      * )
      */
-    public function show(AnswerGetRequest $request)
+    public function show(TopicGetRequest $request)
     {
         return $this->index($request);
     }
