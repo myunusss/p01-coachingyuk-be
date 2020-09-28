@@ -104,7 +104,7 @@ class AnswerController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/AnswerStoreRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/AnswerStoreRequest"),
      *         )
      *     ),
@@ -157,7 +157,7 @@ class AnswerController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/AnswerUpdateRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/AnswerUpdateRequest"),
      *         )
      *     ),
@@ -245,7 +245,7 @@ class AnswerController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/AnswerToggleHelpfulRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/AnswerToggleHelpfulRequest"),
      *         )
      *     ),

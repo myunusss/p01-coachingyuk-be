@@ -31,6 +31,14 @@ use App\Rules\ExistsId;
  *   @OA\Property(
  *     property="bio",
  *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="avatar",
+ *     type="file"
+ *   ),
+ *   @OA\Property(
+ *     property="header_image",
+ *     type="file"
  *   )
  * )
  */
@@ -60,6 +68,8 @@ class UserStoreRequest extends FormRequest
             'email' => ['required', 'email'],
             'password' => ['required'],
             'bio' => ['nullable'],
+            'avatar' => ['nullable'],
+            'headline_image' => ['nullable'],
         ];
     }
 

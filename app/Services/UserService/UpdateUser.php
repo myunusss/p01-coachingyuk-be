@@ -19,6 +19,16 @@ class UpdateUser extends DefaultService implements ServiceInterface
         $user->email = $dto['email'] ?? $user->email;
         $user->bio = $dto['bio'] ?? $user->bio;
         $user->password = $dto['password'] ? bcrypt($dto['password']) : $user->password;
+        
+        if ($dto['avatar'] != null) {
+            $avatarFile = $dto['avatar'];
+            $user->avatar = FileHelper::uploadFile($avatarFile, 'avatars');
+        }
+
+        if ($dto['header_image'] != null) {
+            $headerImageFile = $dto['header_image'];
+            $user->header_image = FileHelper::uploadFile($headerImageFile, 'header-images');
+        }
 
         $this->prepareAuditUpdate($user);
 

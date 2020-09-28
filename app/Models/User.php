@@ -65,6 +65,8 @@ class User extends Authenticatable
         'bio',
         'provider',
         'provider_id',
+        'avatar',
+        'header_image'
     ];
 
     /**

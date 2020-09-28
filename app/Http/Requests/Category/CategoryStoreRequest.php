@@ -11,6 +11,10 @@ use App\Rules\ExistsId;
  *   @OA\Property(
  *     property="name",
  *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="background",
+ *     type="file"
  *   )
  * )
  */

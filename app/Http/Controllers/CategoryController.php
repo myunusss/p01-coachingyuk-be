@@ -103,7 +103,7 @@ class CategoryController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/CategoryStoreRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/CategoryStoreRequest"),
      *         )
      *     ),
@@ -156,7 +156,7 @@ class CategoryController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/CategoryUpdateRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/CategoryUpdateRequest"),
      *         )
      *     ),

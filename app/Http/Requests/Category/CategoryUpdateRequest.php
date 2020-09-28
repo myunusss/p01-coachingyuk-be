@@ -12,6 +12,10 @@ use App\Rules\ExistsId;
  *     property="name",
  *     type="string"
  *   ),
+ *   @OA\Property(
+ *     property="background",
+ *     type="file"
+ *   )
  * )
  */
 class CategoryUpdateRequest extends FormRequest

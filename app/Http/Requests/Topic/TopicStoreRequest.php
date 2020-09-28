@@ -14,7 +14,7 @@ use App\Rules\ExistsId;
  *   ),
  *   @OA\Property(
  *     property="background",
- *     type="string"
+ *     type="file"
  *   )
  * )
  */

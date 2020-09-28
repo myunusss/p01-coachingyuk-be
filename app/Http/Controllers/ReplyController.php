@@ -100,7 +100,7 @@ class ReplyController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/ReplyStoreRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/ReplyStoreRequest"),
      *         )
      *     ),
@@ -153,7 +153,7 @@ class ReplyController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/ReplyUpdateRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/ReplyUpdateRequest"),
      *         )
      *     ),

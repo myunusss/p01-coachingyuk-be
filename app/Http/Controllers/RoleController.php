@@ -102,7 +102,7 @@ class RoleController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/RoleStoreRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/RoleStoreRequest"),
      *         )
      *     ),
@@ -155,7 +155,7 @@ class RoleController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/RoleUpdateRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/RoleUpdateRequest"),
      *         )
      *     ),

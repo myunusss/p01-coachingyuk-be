@@ -7,6 +7,7 @@ use App\Services\DefaultService;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Helpers\FileHelper;
 
 class StoreUser extends DefaultService implements ServiceInterface
 {
@@ -19,6 +20,16 @@ class StoreUser extends DefaultService implements ServiceInterface
         $user->email = $dto['email'];
         $user->password = bcrypt($dto['password']);
         $user->bio = $dto['bio'];
+        
+        if ($dto['avatar'] != null) {
+            $avatarFile = $dto['avatar'];
+            $user->avatar = FileHelper::uploadFile($avatarFile, 'avatars');
+        }
+
+        if ($dto['header_image'] != null) {
+            $headerImageFile = $dto['header_image'];
+            $user->header_image = FileHelper::uploadFile($headerImageFile, 'header-images');
+        }
 
         $this->prepareAuditInsert($user);
 

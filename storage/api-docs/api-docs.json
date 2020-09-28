@@ -46,7 +46,7 @@
                     "description": "Answer store request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/AnswerStoreRequest"
                             }
@@ -134,7 +134,7 @@
                     "description": "Answer update request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/AnswerUpdateRequest"
                             }
@@ -211,7 +211,7 @@
                     "description": "Answer toggle helpful request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/AnswerToggleHelpfulRequest"
                             }
@@ -253,7 +253,7 @@
                     "description": "Login request object that needs to be authenticated",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/AuthLoginRequest"
                             }
@@ -290,7 +290,7 @@
                     "description": "Register request object that needs to be authenticated",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/AuthRegisterRequest"
                             }
@@ -410,7 +410,7 @@
                     "description": "Category store request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/CategoryStoreRequest"
                             }
@@ -498,7 +498,7 @@
                     "description": "Category update request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/CategoryUpdateRequest"
                             }
@@ -596,7 +596,7 @@
                     "description": "Question store request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/QuestionStoreRequest"
                             }
@@ -684,7 +684,7 @@
                     "description": "Question update request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/QuestionUpdateRequest"
                             }
@@ -761,7 +761,7 @@
                     "description": "Question follow request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/QuestionFollowRequest"
                             }
@@ -824,7 +824,7 @@
                     "description": "Reply store request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/ReplyStoreRequest"
                             }
@@ -912,7 +912,7 @@
                     "description": "Reply update request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/ReplyUpdateRequest"
                             }
@@ -1010,7 +1010,7 @@
                     "description": "Role store request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/RoleStoreRequest"
                             }
@@ -1098,7 +1098,7 @@
                     "description": "Role update request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/RoleUpdateRequest"
                             }
@@ -1196,7 +1196,7 @@
                     "description": "Topic store request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/TopicStoreRequest"
                             }
@@ -1284,7 +1284,7 @@
                     "description": "Topic update request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/TopicUpdateRequest"
                             }
@@ -1361,7 +1361,7 @@
                     "description": "Topic join request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/TopicJoinRequest"
                             }
@@ -1424,7 +1424,7 @@
                     "description": "User store request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/UserStoreRequest"
                             }
@@ -1512,7 +1512,7 @@
                     "description": "User update request object",
                     "required": true,
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/UserUpdateRequest"
                             }
@@ -1648,6 +1648,9 @@
                 "properties": {
                     "name": {
                         "type": "string"
+                    },
+                    "background": {
+                        "type": "file"
                     }
                 },
                 "type": "object"
@@ -1656,6 +1659,9 @@
                 "properties": {
                     "name": {
                         "type": "string"
+                    },
+                    "background": {
+                        "type": "file"
                     }
                 },
                 "type": "object"
@@ -1748,7 +1754,7 @@
                         "type": "string"
                     },
                     "background": {
-                        "type": "string"
+                        "type": "file"
                     }
                 },
                 "type": "object"
@@ -1759,7 +1765,7 @@
                         "type": "string"
                     },
                     "background": {
-                        "type": "string"
+                        "type": "file"
                     }
                 },
                 "type": "object"
@@ -1783,6 +1789,12 @@
                     },
                     "bio": {
                         "type": "string"
+                    },
+                    "avatar": {
+                        "type": "file"
+                    },
+                    "header_image": {
+                        "type": "file"
                     }
                 },
                 "type": "object"
@@ -1806,6 +1818,12 @@
                     },
                     "bio": {
                         "type": "string"
+                    },
+                    "avatar": {
+                        "type": "file"
+                    },
+                    "header_image": {
+                        "type": "file"
                     }
                 },
                 "type": "object"

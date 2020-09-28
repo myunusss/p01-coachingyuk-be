@@ -19,7 +19,7 @@ class StoreTopic extends DefaultService implements ServiceInterface
         $topic->name = $dto['name'];
         
         $backgroundFile = $dto['background'];
-        $category->background = FileHelper::uploadFile($backgroundFile);
+        $category->background = FileHelper::uploadFile($backgroundFile, 'topics');
 
         $this->prepareAuditInsert($topic);
 

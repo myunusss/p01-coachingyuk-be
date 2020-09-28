@@ -31,6 +31,14 @@ use App\Rules\ExistsId;
  *   @OA\Property(
  *     property="bio",
  *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="avatar",
+ *     type="file"
+ *   ),
+ *   @OA\Property(
+ *     property="header_image",
+ *     type="file"
  *   )
  * )
  */
@@ -69,6 +77,8 @@ class UserUpdateRequest extends FormRequest
             'email' => ['nullable'],
             'password' => ['nullable'],
             'bio' => ['nullable'],
+            'avatar' => ['nullable'],
+            'headline_image' => ['nullable'],
         ];
     }
 

@@ -21,7 +21,7 @@ class AuthController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/AuthLoginRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/AuthLoginRequest"),
      *         )
      *     ),
@@ -62,7 +62,7 @@ class AuthController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/AuthRegisterRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/AuthRegisterRequest"),
      *         )
      *     ),

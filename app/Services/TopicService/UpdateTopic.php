@@ -17,7 +17,7 @@ class UpdateTopic extends DefaultService implements ServiceInterface
         
         if ($dto['background'] != null) {
             $backgroundFile = $dto['background'];
-            $category->background = FileHelper::uploadFile($backgroundFile);
+            $category->background = FileHelper::uploadFile($backgroundFile, 'topics');
         }
 
         $this->prepareAuditUpdate($topic);

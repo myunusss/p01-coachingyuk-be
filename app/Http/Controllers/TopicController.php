@@ -105,7 +105,7 @@ class TopicController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/TopicStoreRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/TopicStoreRequest"),
      *         )
      *     ),
@@ -158,7 +158,7 @@ class TopicController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/TopicUpdateRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/TopicUpdateRequest"),
      *         )
      *     ),
@@ -246,7 +246,7 @@ class TopicController extends Controller
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/TopicJoinRequest"),
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(ref="#/components/schemas/TopicJoinRequest"),
      *         )
      *     ),
