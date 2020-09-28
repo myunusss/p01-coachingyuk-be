@@ -18,7 +18,6 @@ class StoreCategory extends DefaultService implements ServiceInterface
         $category->name = $dto['name'];
         
         $backgroundFile = $dto['background'];
-
         $category->background = FileHelper::uploadFile($backgroundFile);
 
         $this->prepareAuditInsert($category);

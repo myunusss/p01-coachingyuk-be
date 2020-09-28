@@ -19,6 +19,7 @@ class Topic extends DefaultModel
         'user_id',
         'name',
         'slug',
+        'background',
     ];
     
     /**

@@ -11,6 +11,10 @@ use App\Rules\ExistsId;
  *   @OA\Property(
  *     property="name",
  *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="background",
+ *     type="string"
  *   )
  * )
  */
@@ -36,6 +40,7 @@ class TopicStoreRequest extends FormRequest
         return [
             'category_id' => ['required', new ExistsId('categories')],
             'name' => ['required'],
+            'background' => ['required'],
         ];
     }
 

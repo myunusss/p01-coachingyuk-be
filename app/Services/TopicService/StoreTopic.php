@@ -7,6 +7,7 @@ use App\Services\DefaultService;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Topic;
+use App\Helpers\FileHelper;
 
 class StoreTopic extends DefaultService implements ServiceInterface
 {
@@ -16,6 +17,9 @@ class StoreTopic extends DefaultService implements ServiceInterface
         $topic->user_id = Auth::user()->id;
         $topic->category_id = $dto['category_id'];
         $topic->name = $dto['name'];
+        
+        $backgroundFile = $dto['background'];
+        $category->background = FileHelper::uploadFile($backgroundFile);
 
         $this->prepareAuditInsert($topic);
 

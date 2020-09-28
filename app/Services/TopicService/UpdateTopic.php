@@ -14,6 +14,11 @@ class UpdateTopic extends DefaultService implements ServiceInterface
         $topic = Topic::find($dto['id']);
         $topic->category_id = $dto['category_id'] ?? $topic->category_id;
         $topic->name = $dto['name'] ?? $topic->name;
+        
+        if ($dto['background'] != null) {
+            $backgroundFile = $dto['background'];
+            $category->background = FileHelper::uploadFile($backgroundFile);
+        }
 
         $this->prepareAuditUpdate($topic);
 

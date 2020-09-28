@@ -13,7 +13,11 @@ class UpdateCategory extends DefaultService implements ServiceInterface
     {
         $category = Category::find($dto['id']);
         $category->name = $dto['name'] ?? $category->name;
-        $category->background = $dto['background'] ?? $category->background;
+        
+        if ($dto['background'] != null) {
+            $backgroundFile = $dto['background'];
+            $category->background = FileHelper::uploadFile($backgroundFile);
+        }
 
         $this->prepareAuditUpdate($category);
 

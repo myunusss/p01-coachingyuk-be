@@ -13,6 +13,10 @@ use App\Rules\ExistsId;
  *     property="name",
  *     type="string"
  *   ),
+ *   @OA\Property(
+ *     property="background",
+ *     type="string"
+ *   )
  * )
  */
 class TopicUpdateRequest extends FormRequest
@@ -46,6 +50,7 @@ class TopicUpdateRequest extends FormRequest
             'slug' => ['required', new ExistsSlug('topics')],
             'category_id' => ['required', new ExistsId('categories')],
             'name' => ['nullable'],
+            'background' => ['nullable'],
         ];
     }
 
