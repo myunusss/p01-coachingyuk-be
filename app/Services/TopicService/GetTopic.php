@@ -11,7 +11,7 @@ class GetTopic extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $topic = Topic::with('questions')->orderBy($dto['sort_by'], $dto['sort_dir']);
+        $topic = Topic::with(['category', 'questions'])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['user_id'] != null) {
             $topicIds = UserJoinedTopic::where('user_id', $dto['user_id'])->pluck('topic_id');
