@@ -1455,6 +1455,48 @@
                 ]
             }
         },
+        "/api/topics/check-in": {
+            "post": {
+                "tags": [
+                    "Topic"
+                ],
+                "summary": "Add/Remove user's check-in status in system",
+                "description": "",
+                "operationId": "CheckInTopic",
+                "requestBody": {
+                    "description": "Topic join request object",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TopicJoinRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TopicJoinRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
