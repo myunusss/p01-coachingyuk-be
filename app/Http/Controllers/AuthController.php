@@ -87,7 +87,7 @@ class AuthController extends Controller
     public function register(AuthRegisterRequest $request)
     {
         $records = app('Register')->execute($request->all());
-        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = UNAUTHORIZED_CODE;
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = $records['code'];
         return APIResponse::json($records, $code);
     }
 

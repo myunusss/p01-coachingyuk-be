@@ -13,6 +13,15 @@ class Register extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $role = Role::where('code', 'user')->first();
+        $users = User::where('username', $dto['username'])->orWhere('email', $dto['email'])->get();
+
+        if (!$users->isEmpty()) {
+            $this->results['error'] = true;
+            $this->results['code'] = UNPROCESSABLE_ENTITY_CODE;
+            $this->results['message'] = 'This username/email has already been used';
+            return;
+        }
+
         $user = new User();
         $user->role_id = $role->id;
         $user->first_name = $dto['first_name'];
