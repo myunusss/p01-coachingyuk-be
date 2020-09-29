@@ -60,4 +60,14 @@ class Topic extends DefaultModel
         )
         ->withTimestamps();
     }
+
+    public function checkInUsers()
+    {
+        return $this->belongsToMany(
+            'App\Models\User',
+            'user_check_in_topics'
+        )
+        ->withPivot('date')
+        ->withTimestamps();
+    }
 }

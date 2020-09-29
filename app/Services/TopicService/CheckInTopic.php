@@ -4,9 +4,10 @@ namespace App\Services\TopicService;
 
 use App\Services\ServiceInterface;
 use App\Services\DefaultService;
+use App\Models\UserCheckInTopic;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\UserCheckInTopic;
 
 class CheckInTopic extends DefaultService implements ServiceInterface
 {

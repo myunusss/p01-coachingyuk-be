@@ -6,12 +6,21 @@ use App\Models\Topic;
 use App\Models\UserJoinedTopic;
 use App\Services\ServiceInterface;
 use App\Services\DefaultService;
+use Carbon\Carbon;
 
 class GetTopic extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $topics = Topic::with(['category', 'user', 'questions'])->orderBy($dto['sort_by'], $dto['sort_dir']);
+        $topics = Topic::with([
+            'category',
+            'checkInUsers' => function ($query) use ($dto) {
+                if ($dto['user_id'] != null) {
+                    $query->where('user_id', $dto['user_id']);
+                }
+            },
+            'user',
+            'questions'])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['user_id'] != null) {
             $topicIds = UserJoinedTopic::where('user_id', $dto['user_id'])->pluck('topic_id');
@@ -41,6 +50,7 @@ class GetTopic extends DefaultService implements ServiceInterface
     {
         $response = $topic;
         $response->total_users = $topic->joinedUsers->count();
+        $response->total_check_ins = $topic->checkInUsers->count();
         $response->total_coach_users = $topic->joinedUsers
             ->filter(function ($user) {
                 return $user->role->code == 'coach';
