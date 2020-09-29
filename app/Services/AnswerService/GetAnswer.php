@@ -10,22 +10,36 @@ class GetAnswer extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $answer = Answer::with('question', 'user', 'replies')->orderBy($dto['sort_by'], $dto['sort_dir']);
+        $query = Answer::with('question', 'user', 'replies')->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['question_id'] != null) {
-            $answer->where('question_id', $dto['question_id']);
+            $query->where('question_id', $dto['question_id']);
         }
 
         if ($dto['slug'] != null) {
-            $answer->where('slug', $dto['slug']);
-            $data = $answer->first();
+            $query->where('slug', $dto['slug']);
+            $data = $this->convert($query->first());
         } else {
-            $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $answer->count());
-            $answer = $this->paginateData($answer, $dto['per_page'], $dto['page']);
-            $data = $answer->get();
+            $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $query->count());
+            $query = $this->paginateData($query, $dto['per_page'], $dto['page']);
+            $data = $query->get();
+            $data = $query->get()->map(function ($query) {
+                return $this->convert($query);
+            });
         }
 
         $this->results['message'] = 'Answer data successfully fetched';
         $this->results['data'] = $data;
+    }
+    
+    private function convert($answer)
+    {
+        $response = $answer;
+
+        $response->total_helped_users = $answer->helpedUsers->count();
+        $response->total_replies = $answer->replies->count();
+        unset($newTopic->helpedUsers);
+        
+        return $response;
     }
 }

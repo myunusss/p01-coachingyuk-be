@@ -11,27 +11,40 @@ class GetTopic extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $topic = Topic::with(['category', 'user', 'questions'])->orderBy($dto['sort_by'], $dto['sort_dir']);
+        $topics = Topic::with(['category', 'user', 'questions'])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['user_id'] != null) {
             $topicIds = UserJoinedTopic::where('user_id', $dto['user_id'])->pluck('topic_id');
-            $topic->whereIn('id', $topicIds);
+            $topics->whereIn('id', $topicIds);
         }
         
         if ($dto['category_id'] != null) {
-            $topic->where('category_id', $dto['category_id']);
+            $topics->where('category_id', $dto['category_id']);
         }
 
         if ($dto['slug'] != null) {
-            $topic->where('slug', $dto['slug']);
-            $data = $topic->first();
+            $topics->where('slug', $dto['slug']);
+            $data = $this->convert($topics->first());
         } else {
-            $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $topic->count());
-            $topic = $this->paginateData($topic, $dto['per_page'], $dto['page']);
-            $data = $topic->get();
+            $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $topics->count());
+            $topics = $this->paginateData($topics, $dto['per_page'], $dto['page']);
+            $data = $topics->get()->map(function ($topic) {
+                return $this->convert($topic);
+            });
         }
 
         $this->results['message'] = 'Topic data successfully fetched';
         $this->results['data'] = $data;
+    }
+
+    private function convert($topic)
+    {
+        $response = $topic;
+        $response->total_users = $topic->joinedUsers->count();
+        $response->total_coach_users = $topic->joinedUsers
+            ->filter(function ($user) {
+                return $user->role->code == 'coach';
+            })->count();
+        return $response;
     }
 }

@@ -56,7 +56,7 @@ class Answer extends DefaultModel
             ->saveSlugsTo('slug');
     }
 
-    public function helpedUsers()
+    public function helpedUserAnswers()
     {
         return $this->hasMany('App\Models\UserHelpfulAnswer');
     }
@@ -74,5 +74,14 @@ class Answer extends DefaultModel
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function helpedUsers()
+    {
+        return $this->belongsToMany(
+            'App\Models\User',
+            'user_helpful_answers'
+        )
+        ->withTimestamps();
     }
 }

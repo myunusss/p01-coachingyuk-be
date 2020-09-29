@@ -36,7 +36,7 @@ class Question extends DefaultModel
         return $this->hasMany('App\Models\Answer');
     }
 
-    public function followingUsers()
+    public function followingUserQuestions()
     {
         return $this->hasMany('App\Models\UserFollowedQuestion');
     }
@@ -49,5 +49,14 @@ class Question extends DefaultModel
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function followingUsers()
+    {
+        return $this->belongsToMany(
+            'App\Models\User',
+            'user_followed_answers'
+        )
+        ->withTimestamps();
     }
 }

@@ -10,18 +10,47 @@ class GetCategory extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $category = Category::with('topics')->orderBy($dto['sort_by'], $dto['sort_dir']);
+        $categories = Category::with('topics')->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['id'] != null) {
-            $category->where('id', $dto['id']);
-            $data = $category->first();
+            $categories->where('id', $dto['id']);
+            $data = $this->convert($categories->first());
         } else {
-            $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $category->count());
-            $category = $this->paginateData($category, $dto['per_page'], $dto['page']);
-            $data = $category->get();
+            $this->results['pagination'] = $this->paginationDetail(
+                $dto['per_page'],
+                $dto['page'],
+                $categories->count()
+            );
+            $categories = $this->paginateData($categories, $dto['per_page'], $dto['page']);
+            $data = $categories->get()->map(function ($category) {
+                return $this->convert($category);
+            });
         }
 
         $this->results['message'] = 'Category data successfully fetched';
         $this->results['data'] = $data;
+    }
+    
+    private function convert($category)
+    {
+        $response = $category;
+        $response->topics = $category->topics->map(function ($topic) {
+            $newTopic = $topic;
+
+            $newTopic->total_users = $topic->joinedUsers->count();
+            $newTopic->total_coach_users = $topic->joinedUsers
+                ->filter(function ($user) {
+                    return $user->role->code == 'coach';
+                })->count();
+            $newTopic->total_answers = $topic->questions
+                ->map(function ($question) {
+                    return $question->answers->count();
+                })->sum();
+
+            unset($newTopic->joinedUsers);
+            unset($newTopic->questions);
+        });
+        
+        return $response;
     }
 }

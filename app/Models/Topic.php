@@ -37,7 +37,7 @@ class Topic extends DefaultModel
         return $this->belongsTo('App\Models\Category');
     }
 
-    public function joinedUsers()
+    public function joinedUserTopics()
     {
         return $this->hasMany('App\Models\UserJoinedTopic');
     }
@@ -50,5 +50,14 @@ class Topic extends DefaultModel
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function joinedUsers()
+    {
+        return $this->belongsToMany(
+            'App\Models\User',
+            'user_joined_topics'
+        )
+        ->withTimestamps();
     }
 }
