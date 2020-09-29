@@ -18,6 +18,15 @@ class AnswerController extends Controller
      *     operationId="GetAnswers",
      *     summary="Get list of answer",
      *     description="",
+     *     @OA\Parameter(
+     *         name="question_id",
+     *         in="query",
+     *         description="Question Id of answers to return",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="int"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",

@@ -21,6 +21,17 @@
                 "summary": "Get list of answer",
                 "description": "",
                 "operationId": "GetAnswers",
+                "parameters": [
+                    {
+                        "name": "question_id",
+                        "in": "query",
+                        "description": "Question Id of answers to return",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -385,6 +396,17 @@
                 "summary": "Get list of categories",
                 "description": "",
                 "operationId": "GetCategories",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "Creator user id of categories to return",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -571,6 +593,17 @@
                 "summary": "Get list of questions",
                 "description": "",
                 "operationId": "GetQuestions",
+                "parameters": [
+                    {
+                        "name": "topic_id",
+                        "in": "query",
+                        "description": "Topic id of questions to return",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -799,6 +832,17 @@
                 "summary": "Get list of reply",
                 "description": "",
                 "operationId": "GetReplies",
+                "parameters": [
+                    {
+                        "name": "answer_id",
+                        "in": "query",
+                        "description": "Answer id of replies to return",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -1171,6 +1215,26 @@
                 "summary": "Get list of topics",
                 "description": "",
                 "operationId": "GetTopics",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "Creator user id of topics to return",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Category id of topics to return",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"

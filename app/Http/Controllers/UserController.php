@@ -41,7 +41,6 @@ class UserController extends Controller
             'per_page' => $request->per_page ?? 10,
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
-            'question_id' => $request->search ?? '',
             'id' => $request->id ?? null
         ];
         $records = app('GetUser')->execute($filter);

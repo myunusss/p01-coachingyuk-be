@@ -18,6 +18,24 @@ class TopicController extends Controller
      *     operationId="GetTopics",
      *     summary="Get list of topics",
      *     description="",
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         description="Creator user id of topics to return",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="int"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="category_id",
+     *         in="query",
+     *         description="Category id of topics to return",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="int"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",

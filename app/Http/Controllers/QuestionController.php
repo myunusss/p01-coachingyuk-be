@@ -18,6 +18,15 @@ class QuestionController extends Controller
      *     operationId="GetQuestions",
      *     summary="Get list of questions",
      *     description="",
+     *     @OA\Parameter(
+     *         name="topic_id",
+     *         in="query",
+     *         description="Topic id of questions to return",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="int"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",

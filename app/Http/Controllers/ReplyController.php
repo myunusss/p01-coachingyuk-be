@@ -17,6 +17,15 @@ class ReplyController extends Controller
      *     operationId="GetReplies",
      *     summary="Get list of reply",
      *     description="",
+     *     @OA\Parameter(
+     *         name="answer_id",
+     *         in="query",
+     *         description="Answer id of replies to return",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="int"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",

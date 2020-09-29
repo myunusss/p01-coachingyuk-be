@@ -17,6 +17,15 @@ class CategoryController extends Controller
      *     operationId="GetCategories",
      *     summary="Get list of categories",
      *     description="",
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         description="Creator user id of categories to return",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="int"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
