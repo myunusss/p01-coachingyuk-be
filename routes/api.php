@@ -33,5 +33,6 @@ Route::group(['middleware' => 'response.time'], function () {
         Route::post('answers/toggle-helpful', 'AnswerController@toggleHelpful');
         Route::post('questions/follow', 'QuestionController@follow');
         Route::post('topics/join', 'TopicController@join');
+        Route::post('topics/check-in', 'TopicController@checkIn');
     });
 });

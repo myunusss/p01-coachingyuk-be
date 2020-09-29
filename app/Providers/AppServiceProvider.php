@@ -45,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('StoreRole', 'App\Services\RoleService\StoreRole');
         $this->registerService('UpdateRole', 'App\Services\RoleService\UpdateRole');
 
+        $this->registerService('CheckInTopic', 'App\Services\TopicService\CheckInTopic');
         $this->registerService('DestroyTopic', 'App\Services\TopicService\DestroyTopic');
         $this->registerService('GetTopic', 'App\Services\TopicService\GetTopic');
         $this->registerService('JoinTopic', 'App\Services\TopicService\JoinTopic');

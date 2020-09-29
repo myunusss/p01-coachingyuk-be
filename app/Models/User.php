@@ -94,6 +94,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserJoinedTopic');
     }
 
+    public function checkInTopics()
+    {
+        return $this->hasMany('App\Models\UserCheckInTopic');
+    }
+
     public function role()
     {
         return $this->belongsTo('App\Models\Role');

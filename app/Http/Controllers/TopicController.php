@@ -300,4 +300,53 @@ class TopicController extends Controller
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/topics/check-in",
+     *     tags={"Topic"},
+     *     operationId="CheckInTopic",
+     *     summary="Add/Remove user's check-in status in system",
+     *     description="",
+     *     @OA\RequestBody(
+     *         description="Topic join request object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/TopicJoinRequest"),
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(ref="#/components/schemas/TopicJoinRequest"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Topic")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function checkIn(TopicJoinRequest $request)
+    {
+        $data = [
+            'topic_id' => $request->topic_id ?? null,
+            'id' => $request->id ?? null
+        ];
+
+        $records = app('CheckInTopic')->execute($data);
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
+        return APIResponse::json($records, $code);
+    }
 }
