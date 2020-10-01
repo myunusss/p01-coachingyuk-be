@@ -18,7 +18,7 @@ class UpdateUser extends DefaultService implements ServiceInterface
         $user->username = $dto['username'] ?? $user->username;
         $user->email = $dto['email'] ?? $user->email;
         $user->bio = $dto['bio'] ?? $user->bio;
-        $user->password = $dto['password'] ? bcrypt($dto['password']) : $user->password;
+        $user->password = isset($dto['password']) ? bcrypt($dto['password']) : $user->password;
         
         if ($dto['avatar'] != null) {
             $avatarFile = $dto['avatar'];
