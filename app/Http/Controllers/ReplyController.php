@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\APIResponse;
 use App\Http\Requests\Reply\ReplyDestroyRequest;
 use App\Http\Requests\Reply\ReplyGetRequest;
-use App\Http\Requests\Reply\repliestoreRequest;
+use App\Http\Requests\Reply\ReplyStoreRequest;
 use App\Http\Requests\Reply\ReplyUpdateRequest;
 
 class ReplyController extends Controller
@@ -134,7 +134,7 @@ class ReplyController extends Controller
      *     }
      * )
      */
-    public function store(repliestoreRequest $request)
+    public function store(ReplyStoreRequest $request)
     {
         $records = app('StoreReply')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
