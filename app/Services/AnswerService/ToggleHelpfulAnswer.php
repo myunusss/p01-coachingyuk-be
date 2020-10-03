@@ -13,7 +13,11 @@ class ToggleHelpfulAnswer extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $action = 'liked';
-        if ($dto['id'] == null) {
+        $userHelpfulAnswer = UserHelpfulAnswer::where('answer_id', $dto['answer_id'])
+            ->where('user_id', Auth::user()->id)
+            ->first();
+
+        if ($userHelpfulAnswer == null) {
             $userHelpfulAnswer = new UserHelpfulAnswer();
             $userHelpfulAnswer->user_id = Auth::user()->id;
             $userHelpfulAnswer->answer_id = $dto['answer_id'];
@@ -23,9 +27,6 @@ class ToggleHelpfulAnswer extends DefaultService implements ServiceInterface
             $userHelpfulAnswer->save();
         } else {
             $action = 'unliked';
-            $userHelpfulAnswer = UserHelpfulAnswer::where('answer_id', $dto['answer_id'])
-                ->where('user_id', Auth::user()->id)
-                ->first();
             $userHelpfulAnswer->delete();
         }
 

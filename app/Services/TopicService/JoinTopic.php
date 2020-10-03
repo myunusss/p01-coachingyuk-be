@@ -13,7 +13,11 @@ class JoinTopic extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $action = 'joined';
-        if ($dto['id'] == null) {
+        $userJoinedTopic = UserJoinedTopic::where('user_id', Auth::user()->id)
+            ->where('topic_id', $dto['topic_id'])
+            ->first();
+
+        if ($userJoinedTopic == null) {
             $userJoinedTopic = new UserJoinedTopic();
             $userJoinedTopic->user_id = Auth::user()->id;
             $userJoinedTopic->topic_id = $dto['topic_id'];
@@ -23,9 +27,6 @@ class JoinTopic extends DefaultService implements ServiceInterface
             $userJoinedTopic->save();
         } else {
             $action = 'left';
-            $userJoinedTopic = UserJoinedTopic::where('topic_id', $dto['topic_id'])
-                ->where('user_id', Auth::user()->id)
-                ->first();
             $userJoinedTopic->delete();
         }
 

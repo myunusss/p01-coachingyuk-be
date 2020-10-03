@@ -13,7 +13,11 @@ class FollowQuestion extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $action = 'followed';
-        if ($dto['id'] == null) {
+        $userFollowedQuestion = UserFollowedQuestion::where('question_id', $dto['question_id'])
+            ->where('user_id', Auth::user()->id)
+            ->first();
+
+        if ($userFollowedQuestion == null) {
             $userFollowedQuestion = new UserFollowedQuestion();
             $userFollowedQuestion->user_id = Auth::user()->id;
             $userFollowedQuestion->question_id = $dto['question_id'];
@@ -23,9 +27,6 @@ class FollowQuestion extends DefaultService implements ServiceInterface
             $userFollowedQuestion->save();
         } else {
             $action = 'unfollowed';
-            $userFollowedQuestion = UserFollowedQuestion::where('question_id', $dto['question_id'])
-                ->where('user_id', Auth::user()->id)
-                ->first();
             $userFollowedQuestion->delete();
         }
 
