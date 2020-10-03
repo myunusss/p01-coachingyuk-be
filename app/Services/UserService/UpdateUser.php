@@ -6,6 +6,7 @@ use App\Services\ServiceInterface;
 use App\Services\DefaultService;
 
 use App\Models\User;
+use App\Helpers\FileHelper;
 
 class UpdateUser extends DefaultService implements ServiceInterface
 {
