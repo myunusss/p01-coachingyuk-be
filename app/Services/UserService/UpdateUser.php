@@ -20,12 +20,12 @@ class UpdateUser extends DefaultService implements ServiceInterface
         $user->bio = $dto['bio'] ?? $user->bio;
         $user->password = isset($dto['password']) ? bcrypt($dto['password']) : $user->password;
         
-        if ($dto['avatar'] != null) {
+        if (isset($dto['avatar'])) {
             $avatarFile = $dto['avatar'];
             $user->avatar = FileHelper::uploadFile($avatarFile, 'avatars');
         }
 
-        if ($dto['header_image'] != null) {
+        if (isset($dto['header_image'])) {
             $headerImageFile = $dto['header_image'];
             $user->header_image = FileHelper::uploadFile($headerImageFile, 'header-images');
         }
