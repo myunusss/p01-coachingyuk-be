@@ -6,6 +6,11 @@ use Illuminate\Support\Str;
 
 class FileHelper
 {
+    public static function isFileExist($file)
+    {
+        return isset($file) && $file != "null";
+    }
+
     public static function uploadFile($file, $rootPath = 'categories')
     {
         $filename = Str::random(20);
