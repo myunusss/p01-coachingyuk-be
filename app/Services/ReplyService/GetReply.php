@@ -10,19 +10,19 @@ class GetReply extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $replies = Reply::with(['user', 'answer'])->orderBy($dto['sort_by'], $dto['sort_dir']);
+        $query = Reply::with(['user', 'answer'])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['answer_id'] != null) {
-            $topics->where('answer_id', $dto['answer_id']);
+            $query->where('answer_id', $dto['answer_id']);
         }
 
         if ($dto['id'] != null) {
-            $replies->where('id', $dto['id']);
-            $data = $replies->first();
+            $query->where('id', $dto['id']);
+            $data = $query->first();
         } else {
-            $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $replies->count());
-            $replies = $this->paginateData($replies, $dto['per_page'], $dto['page']);
-            $data = $replies->get();
+            $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $query->count());
+            $query = $this->paginateData($query, $dto['per_page'], $dto['page']);
+            $data = $query->get();
         }
 
         $this->results['message'] = 'Reply data successfully fetched';
