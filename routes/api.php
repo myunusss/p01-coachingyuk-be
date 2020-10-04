@@ -34,5 +34,6 @@ Route::group(['middleware' => 'response.time'], function () {
         Route::post('questions/follow', 'QuestionController@follow');
         Route::post('topics/join', 'TopicController@join');
         Route::post('topics/check-in', 'TopicController@checkIn');
+        Route::post('users/become-coach', 'UserController@becomeCoach');
     });
 });

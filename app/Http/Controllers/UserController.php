@@ -7,6 +7,7 @@ use App\Http\Requests\User\UserDestroyRequest;
 use App\Http\Requests\User\UserGetRequest;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -227,6 +228,41 @@ class UserController extends Controller
     public function destroy(UserDestroyRequest $request)
     {
         $records = app('DestroyUser')->execute($request->all());
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
+        return APIResponse::json($records, $code);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/users/become-coach",
+     *     tags={"User"},
+     *     operationId="BecomeCoachUser",
+     *     summary="Update user's role into coach in system",
+     *     description="",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/User")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function becomeCoach(Request $request)
+    {
+        $records = app('BecomeCoachUser')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }

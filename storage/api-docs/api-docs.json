@@ -1682,6 +1682,32 @@
                     }
                 ]
             }
+        },
+        "/api/users/become-coach": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user's role into coach in system",
+                "description": "",
+                "operationId": "BecomeCoachUser",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
