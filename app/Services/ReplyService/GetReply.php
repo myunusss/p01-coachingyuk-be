@@ -12,6 +12,10 @@ class GetReply extends DefaultService implements ServiceInterface
     {
         $replies = Reply::with(['user', 'answer'])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
+        if ($dto['answer_id'] != null) {
+            $topics->where('answer_id', $dto['answer_id']);
+        }
+
         if ($dto['id'] != null) {
             $replies->where('id', $dto['id']);
             $data = $replies->first();
