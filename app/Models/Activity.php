@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class ActivityReply extends DefaultModel
+class Activity extends DefaultModel
 {
     /**
      * The attributes that are mass assignable.
@@ -11,13 +11,13 @@ class ActivityReply extends DefaultModel
      */
     protected $fillable = [
         'user_id',
-        'activity_id',
+        'topic_id',
         'content',
     ];
     
-    public function activity()
+    public function topic()
     {
-        return $this->belongsTo('App\Models\Activity');
+        return $this->belongsTo('App\Models\Topic');
     }
     
     public function user()
