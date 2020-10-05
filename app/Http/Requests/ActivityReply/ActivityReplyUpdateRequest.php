@@ -9,7 +9,7 @@ use App\Rules\ExistsId;
  * @OA\Schema(
  *   schema="ActivityReplyUpdateRequest",
  *   @OA\Property(
- *     property="topic_id",
+ *     property="activity_id",
  *     type="integer"
  *   ),
  *   @OA\Property(
