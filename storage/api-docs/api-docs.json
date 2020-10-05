@@ -2108,7 +2108,7 @@
         "schemas": {
             "ActivityReplyStoreRequest": {
                 "properties": {
-                    "topic_id": {
+                    "activity_id": {
                         "type": "integer"
                     },
                     "content": {
@@ -2119,7 +2119,7 @@
             },
             "ActivityReplyUpdateRequest": {
                 "properties": {
-                    "topic_id": {
+                    "activity_id": {
                         "type": "integer"
                     },
                     "content": {
