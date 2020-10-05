@@ -22,7 +22,6 @@ class GetAnswer extends DefaultService implements ServiceInterface
         } else {
             $this->results['pagination'] = $this->paginationDetail($dto['per_page'], $dto['page'], $query->count());
             $query = $this->paginateData($query, $dto['per_page'], $dto['page']);
-            $data = $query->get();
             $data = $query->get()->map(function ($query) {
                 return $this->convert($query);
             });
