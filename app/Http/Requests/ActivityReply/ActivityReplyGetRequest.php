@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Activity;
+namespace App\Http\Requests\ActivityReply;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 
-class ActivityGetRequest extends FormRequest
+class ActivityReplyGetRequest extends FormRequest
 {
     /**
      * Add id to request validation

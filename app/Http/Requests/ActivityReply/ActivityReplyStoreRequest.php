@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Activity;
+namespace App\Http\Requests\ActivityReply;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 
 /**
  * @OA\Schema(
- *   schema="ActivityStoreRequest",
+ *   schema="ActivityReplyStoreRequest",
  *   @OA\Property(
  *     property="topic_id",
  *     type="integer"
@@ -18,7 +18,7 @@ use App\Rules\ExistsId;
  *   )
  * )
  */
-class ActivityStoreRequest extends FormRequest
+class ActivityReplyStoreRequest extends FormRequest
 {
     /**
      * Determine if the activity is authorized to make this request.

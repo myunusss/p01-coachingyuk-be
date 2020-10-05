@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Activity;
+namespace App\Http\Requests\ActivityReply;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
 
 /**
  * @OA\Schema(
- *   schema="ActivityUpdateRequest",
+ *   schema="ActivityReplyUpdateRequest",
  *   @OA\Property(
  *     property="topic_id",
  *     type="integer"
@@ -18,7 +18,7 @@ use App\Rules\ExistsId;
  *   )
  * )
  */
-class ActivityUpdateRequest extends FormRequest
+class ActivityReplyUpdateRequest extends FormRequest
 {
     /**
      * Add id to request validation
