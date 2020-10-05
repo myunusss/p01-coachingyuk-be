@@ -14,6 +14,11 @@ class Activity extends DefaultModel
         'topic_id',
         'content',
     ];
+
+    public function activityReplies()
+    {
+        return $this->hasMany('App\Models\ActivityReply');
+    }
     
     public function topic()
     {
