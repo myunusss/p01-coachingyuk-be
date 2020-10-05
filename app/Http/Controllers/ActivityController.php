@@ -19,9 +19,9 @@ class ActivityController extends Controller
      *     summary="Get list of Activity",
      *     description="",
      *     @OA\Parameter(
-     *         name="question_id",
+     *         name="topic_id",
      *         in="query",
-     *         description="Question Id of Activities to return",
+     *         description="Topic Id of Activities to return",
      *         required=false,
      *         @OA\Schema(
      *             type="int"
@@ -51,7 +51,7 @@ class ActivityController extends Controller
             'per_page' => $request->per_page ?? 10,
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
-            'question_id' => $request->question_id ?? null,
+            'topic_id' => $request->topic_id ?? null,
             'slug' => $request->slug ?? null
         ];
         $records = app('GetActivity')->execute($filter);

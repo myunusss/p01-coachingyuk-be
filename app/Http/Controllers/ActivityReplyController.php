@@ -19,9 +19,9 @@ class ActivityReplyController extends Controller
      *     summary="Get list of ActivityReply",
      *     description="",
      *     @OA\Parameter(
-     *         name="question_id",
+     *         name="activity_id",
      *         in="query",
-     *         description="Question Id of Activity Replies to return",
+     *         description="Activity Id of Activity Replies to return",
      *         required=false,
      *         @OA\Schema(
      *             type="int"
@@ -51,7 +51,7 @@ class ActivityReplyController extends Controller
             'per_page' => $request->per_page ?? 10,
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
-            'question_id' => $request->question_id ?? null,
+            'activity_id' => $request->activity_id ?? null,
             'slug' => $request->slug ?? null
         ];
         $records = app('GetActivityReply')->execute($filter);

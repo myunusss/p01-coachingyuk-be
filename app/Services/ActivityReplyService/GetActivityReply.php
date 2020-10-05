@@ -12,6 +12,10 @@ class GetActivityReply extends DefaultService implements ServiceInterface
     {
         $query = ActivityReply::orderBy($dto['sort_by'], $dto['sort_dir']);
 
+        if ($dto['activity_id'] != null) {
+            $query->where('activity_id', $dto['activity_id']);
+        }
+
         if ($dto['id'] != null) {
             $query->where('id', $dto['id']);
             $data = $this->convert($query->first());

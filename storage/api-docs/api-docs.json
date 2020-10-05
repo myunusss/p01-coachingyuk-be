@@ -23,9 +23,9 @@
                 "operationId": "GetActivities",
                 "parameters": [
                     {
-                        "name": "question_id",
+                        "name": "topic_id",
                         "in": "query",
-                        "description": "Question Id of Activities to return",
+                        "description": "Topic Id of Activities to return",
                         "required": false,
                         "schema": {
                             "type": "int"
@@ -220,9 +220,9 @@
                 "operationId": "GetActivity Replies",
                 "parameters": [
                     {
-                        "name": "question_id",
+                        "name": "activity_id",
                         "in": "query",
-                        "description": "Question Id of Activity Replies to return",
+                        "description": "Activity Id of Activity Replies to return",
                         "required": false,
                         "schema": {
                             "type": "int"

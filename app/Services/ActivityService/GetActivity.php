@@ -12,6 +12,10 @@ class GetActivity extends DefaultService implements ServiceInterface
     {
         $query = Activity::orderBy($dto['sort_by'], $dto['sort_dir']);
 
+        if ($dto['topic_id'] != null) {
+            $query->where('topic_id', $dto['topic_id']);
+        }
+
         if ($dto['id'] != null) {
             $query->where('id', $dto['id']);
             $data = $this->convert($query->first());

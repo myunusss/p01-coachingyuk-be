@@ -21,6 +21,8 @@ Route::group(['middleware' => 'response.time'], function () {
     
     Route::group(['middleware' => 'auth:api'], function () {
         Route::resources([
+            'activities' => 'ActivityController',
+            'activity-replies' => 'ActivityReplyController',
             'answers' => 'AnswerController',
             'categories' => 'CategoryController',
             'questions' => 'QuestionController',
