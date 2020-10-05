@@ -52,7 +52,7 @@ class ActivityReplyController extends Controller
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
             'activity_id' => $request->activity_id ?? null,
-            'slug' => $request->slug ?? null
+            'id' => $request->id ?? null
         ];
         $records = app('GetActivityReply')->execute($filter);
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
