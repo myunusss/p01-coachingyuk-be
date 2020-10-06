@@ -2365,6 +2365,9 @@
                     },
                     "header_image": {
                         "type": "file"
+                    },
+                    "role_id": {
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -2394,6 +2397,9 @@
                     },
                     "header_image": {
                         "type": "file"
+                    },
+                    "role_id": {
+                        "type": "integer"
                     }
                 },
                 "type": "object"
