@@ -15,6 +15,10 @@ use App\Rules\ExistsId;
  *   @OA\Property(
  *     property="content",
  *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="note",
+ *     type="string"
  *   )
  * )
  */
@@ -40,6 +44,7 @@ class ActivityStoreRequest extends FormRequest
         return [
             'topic_id' => ['required', new ExistsId('topics')],
             'content' => ['required'],
+            'note' => ['nullable'],
         ];
     }
 

@@ -16,6 +16,7 @@ class StoreActivity extends DefaultService implements ServiceInterface
         $query->user_id = Auth::user()->id;
         $query->topic_id = $dto['topic_id'];
         $query->content = $dto['content'];
+        $query->note = $dto['note'];
 
         $this->prepareAuditInsert($query);
 

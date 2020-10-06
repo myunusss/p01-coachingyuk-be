@@ -15,6 +15,10 @@ use App\Rules\ExistsId;
  *   @OA\Property(
  *     property="content",
  *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="note",
+ *     type="string"
  *   )
  * )
  */
@@ -49,6 +53,7 @@ class ActivityUpdateRequest extends FormRequest
             'id' => ['required', new ExistsId('activities')],
             'topic_id' => ['nullable', new ExistsId('topics')],
             'content' => ['nullable'],
+            'note' => ['nullable'],
         ];
     }
 

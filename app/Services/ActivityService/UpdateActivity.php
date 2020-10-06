@@ -13,6 +13,7 @@ class UpdateActivity extends DefaultService implements ServiceInterface
     {
         $query = Activity::find($dto['id']);
         $query->content = $dto['content'];
+        $query->note = $dto['note'];
 
         $this->prepareAuditUpdate($query);
 

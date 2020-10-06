@@ -13,6 +13,7 @@ class Activity extends DefaultModel
         'user_id',
         'topic_id',
         'content',
+        'note',
     ];
 
     public function activityReplies()
