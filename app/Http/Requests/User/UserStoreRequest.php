@@ -39,6 +39,10 @@ use App\Rules\ExistsId;
  *   @OA\Property(
  *     property="header_image",
  *     type="file"
+ *   ),
+ *   @OA\Property(
+ *     property="role_id",
+ *     type="integer"
  *   )
  * )
  */

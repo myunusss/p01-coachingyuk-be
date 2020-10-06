@@ -14,6 +14,7 @@ class StoreUser extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $user = new User();
+        $user->role_id = $dto['role_id'];
         $user->first_name = $dto['first_name'];
         $user->last_name = $dto['last_name'];
         $user->username = $dto['username'];
