@@ -13,7 +13,7 @@ abstract class DefaultService implements ServiceInterface
 
     public function __construct()
     {
-        $this->results = ['error' => null, 'message' => null, 'data' => null];
+        $this->results = ['error' => null, 'code' => null, 'message' => null, 'data' => null];
     }
 
     abstract protected function process($data);
@@ -29,6 +29,7 @@ abstract class DefaultService implements ServiceInterface
         } catch (\Exception $ex) {
             DB::rollback();
             $this->results['error'] = $ex;
+            $this->results['code'] = FAILURE_CODE;
             $this->results['message'] = $ex->getFile() . " " . $ex->getLine() . ": " . $ex->getMessage();
         }
 
