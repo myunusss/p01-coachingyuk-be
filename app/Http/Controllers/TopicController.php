@@ -18,6 +18,10 @@ class TopicController extends Controller
      *     operationId="GetTopics",
      *     summary="Get list of topics",
      *     description="",
+     *     @OA\Parameter(ref="#/components/parameters/pagination-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-per-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-by"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-dir"),
      *     @OA\Parameter(
      *         name="user_id",
      *         in="query",

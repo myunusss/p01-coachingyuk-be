@@ -17,6 +17,10 @@ class ReplyController extends Controller
      *     operationId="GetReplies",
      *     summary="Get list of reply",
      *     description="",
+     *     @OA\Parameter(ref="#/components/parameters/pagination-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-per-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-by"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-dir"),
      *     @OA\Parameter(
      *         name="answer_id",
      *         in="query",

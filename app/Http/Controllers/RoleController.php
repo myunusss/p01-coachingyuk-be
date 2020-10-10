@@ -17,6 +17,10 @@ class RoleController extends Controller
      *     operationId="GetRoles",
      *     summary="Get list of roles",
      *     description="",
+     *     @OA\Parameter(ref="#/components/parameters/pagination-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-per-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-by"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-dir"),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",

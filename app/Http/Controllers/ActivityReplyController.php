@@ -18,6 +18,10 @@ class ActivityReplyController extends Controller
      *     operationId="GetActivity Replies",
      *     summary="Get list of ActivityReply",
      *     description="",
+     *     @OA\Parameter(ref="#/components/parameters/pagination-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-per-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-by"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-dir"),
      *     @OA\Parameter(
      *         name="activity_id",
      *         in="query",

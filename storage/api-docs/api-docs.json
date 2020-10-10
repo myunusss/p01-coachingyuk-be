@@ -23,9 +23,30 @@
                 "operationId": "GetActivities",
                 "parameters": [
                     {
+                        "$ref": "#/components/parameters/pagination-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-per-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-by"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-dir"
+                    },
+                    {
                         "name": "topic_id",
                         "in": "query",
                         "description": "Topic Id of Activities to return",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id of Activities to return",
                         "required": false,
                         "schema": {
                             "type": "int"
@@ -219,6 +240,18 @@
                 "description": "",
                 "operationId": "GetActivity Replies",
                 "parameters": [
+                    {
+                        "$ref": "#/components/parameters/pagination-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-per-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-by"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-dir"
+                    },
                     {
                         "name": "activity_id",
                         "in": "query",
@@ -416,6 +449,18 @@
                 "description": "",
                 "operationId": "GetAnswers",
                 "parameters": [
+                    {
+                        "$ref": "#/components/parameters/pagination-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-per-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-by"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-dir"
+                    },
                     {
                         "name": "question_id",
                         "in": "query",
@@ -792,6 +837,18 @@
                 "operationId": "GetCategories",
                 "parameters": [
                     {
+                        "$ref": "#/components/parameters/pagination-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-per-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-by"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-dir"
+                    },
+                    {
                         "name": "user_id",
                         "in": "query",
                         "description": "Creator user id of categories to return",
@@ -988,6 +1045,18 @@
                 "description": "",
                 "operationId": "GetQuestions",
                 "parameters": [
+                    {
+                        "$ref": "#/components/parameters/pagination-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-per-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-by"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-dir"
+                    },
                     {
                         "name": "topic_id",
                         "in": "query",
@@ -1228,6 +1297,18 @@
                 "operationId": "GetReplies",
                 "parameters": [
                     {
+                        "$ref": "#/components/parameters/pagination-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-per-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-by"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-dir"
+                    },
+                    {
                         "name": "answer_id",
                         "in": "query",
                         "description": "Answer id of replies to return",
@@ -1423,6 +1504,20 @@
                 "summary": "Get list of roles",
                 "description": "",
                 "operationId": "GetRoles",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/pagination-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-per-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-by"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-dir"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -1610,6 +1705,18 @@
                 "description": "",
                 "operationId": "GetTopics",
                 "parameters": [
+                    {
+                        "$ref": "#/components/parameters/pagination-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-per-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-by"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-dir"
+                    },
                     {
                         "name": "user_id",
                         "in": "query",
@@ -1899,6 +2006,20 @@
                 "summary": "Get list of users",
                 "description": "",
                 "operationId": "GetUsers",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/pagination-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-per-page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-by"
+                    },
+                    {
+                        "$ref": "#/components/parameters/pagination-sort-dir"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -2135,6 +2256,9 @@
                     },
                     "content": {
                         "type": "string"
+                    },
+                    "note": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -2145,6 +2269,9 @@
                         "type": "integer"
                     },
                     "content": {
+                        "type": "string"
+                    },
+                    "note": {
                         "type": "string"
                     }
                 },
@@ -2449,6 +2576,48 @@
                     }
                 },
                 "type": "object"
+            }
+        },
+        "parameters": {
+            "pagination-page": {
+                "name": "page",
+                "in": "query",
+                "description": "The current page for the result set, defaults to *1*",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "default": 1
+                }
+            },
+            "pagination-per-page": {
+                "name": "per_page",
+                "in": "query",
+                "description": "The total data per page for the result set, defaults to *10*",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "default": 10
+                }
+            },
+            "pagination-sort-by": {
+                "name": "sort_by",
+                "in": "query",
+                "description": "The value used for sorting the result set, defaults to *created_at*",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "default": "created_at"
+                }
+            },
+            "pagination-sort-dir": {
+                "name": "sort_dir",
+                "in": "query",
+                "description": "The direction of sorting for the result set, defaults to *desc*",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                    "default": "desc"
+                }
             }
         },
         "securitySchemes": {

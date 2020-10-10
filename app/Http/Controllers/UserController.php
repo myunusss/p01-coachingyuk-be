@@ -18,6 +18,10 @@ class UserController extends Controller
      *     operationId="GetUsers",
      *     summary="Get list of users",
      *     description="",
+     *     @OA\Parameter(ref="#/components/parameters/pagination-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-per-page"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-by"),
+     *     @OA\Parameter(ref="#/components/parameters/pagination-sort-dir"),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
