@@ -73,7 +73,7 @@ use Illuminate\Routing\Controller as BaseController;
  *     description="The direction of sorting for the result set, defaults to *desc*",
  *     required=false,
  *     @OA\Schema(
- *         type="integer",
+ *         type="string",
  *         default="desc",
  *     )
  * ),
