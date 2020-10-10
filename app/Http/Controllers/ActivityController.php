@@ -52,6 +52,7 @@ class ActivityController extends Controller
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
             'topic_id' => $request->topic_id ?? null,
+            'user_id' => $request->user_id ?? null,
             'id' => $request->id ?? null
         ];
         $records = app('GetActivity')->execute($filter);

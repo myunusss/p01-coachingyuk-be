@@ -10,10 +10,14 @@ class GetActivity extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $query = Activity::orderBy($dto['sort_by'], $dto['sort_dir']);
+        $query = Activity::with(['user'])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['topic_id'] != null) {
             $query->where('topic_id', $dto['topic_id']);
+        }
+
+        if ($dto['user_id'] != null) {
+            $query->where('user_id', $dto['user_id']);
         }
 
         if ($dto['id'] != null) {

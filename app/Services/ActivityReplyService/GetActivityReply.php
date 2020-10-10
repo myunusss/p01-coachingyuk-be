@@ -10,10 +10,14 @@ class GetActivityReply extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $query = ActivityReply::orderBy($dto['sort_by'], $dto['sort_dir']);
+        $query = ActivityReply::with(['user'])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['activity_id'] != null) {
             $query->where('activity_id', $dto['activity_id']);
+        }
+
+        if ($dto['user_id'] != null) {
+            $query->where('user_id', $dto['user_id']);
         }
 
         if ($dto['id'] != null) {
