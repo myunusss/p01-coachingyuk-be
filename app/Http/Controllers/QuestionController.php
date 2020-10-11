@@ -28,7 +28,7 @@ class QuestionController extends Controller
      *         description="Topic id of questions to return",
      *         required=false,
      *         @OA\Schema(
-     *             type="int"
+     *             type="integer"
      *         )
      *     ),
      *     @OA\Response(

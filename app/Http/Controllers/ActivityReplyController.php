@@ -28,7 +28,7 @@ class ActivityReplyController extends Controller
      *         description="Activity Id of Activity Replies to return",
      *         required=false,
      *         @OA\Schema(
-     *             type="int"
+     *             type="integer"
      *         )
      *     ),
      *     @OA\Response(

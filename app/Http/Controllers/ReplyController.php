@@ -27,7 +27,7 @@ class ReplyController extends Controller
      *         description="Answer id of replies to return",
      *         required=false,
      *         @OA\Schema(
-     *             type="int"
+     *             type="integer"
      *         )
      *     ),
      *     @OA\Response(

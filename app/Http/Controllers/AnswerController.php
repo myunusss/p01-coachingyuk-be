@@ -28,7 +28,7 @@ class AnswerController extends Controller
      *         description="Question Id of answers to return",
      *         required=false,
      *         @OA\Schema(
-     *             type="int"
+     *             type="integer"
      *         )
      *     ),
      *     @OA\Response(

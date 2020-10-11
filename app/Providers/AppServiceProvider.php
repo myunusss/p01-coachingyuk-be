@@ -40,6 +40,11 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('ToggleHelpfulCategory', 'App\Services\CategoryService\ToggleHelpfulCategory');
         $this->registerService('UpdateCategory', 'App\Services\CategoryService\UpdateCategory');
 
+        $this->registerService('DestroyEvent', 'App\Services\EventService\DestroyEvent');
+        $this->registerService('GetEvent', 'App\Services\EventService\GetEvent');
+        $this->registerService('StoreEvent', 'App\Services\EventService\StoreEvent');
+        $this->registerService('UpdateEvent', 'App\Services\EventService\UpdateEvent');
+
         $this->registerService('DestroyQuestion', 'App\Services\QuestionService\DestroyQuestion');
         $this->registerService('FollowQuestion', 'App\Services\QuestionService\FollowQuestion');
         $this->registerService('GetQuestion', 'App\Services\QuestionService\GetQuestion');

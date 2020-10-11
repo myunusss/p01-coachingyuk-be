@@ -28,7 +28,7 @@ class TopicController extends Controller
      *         description="Creator user id of topics to return",
      *         required=false,
      *         @OA\Schema(
-     *             type="int"
+     *             type="integer"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -37,7 +37,7 @@ class TopicController extends Controller
      *         description="Category id of topics to return",
      *         required=false,
      *         @OA\Schema(
-     *             type="int"
+     *             type="integer"
      *         )
      *     ),
      *     @OA\Response(

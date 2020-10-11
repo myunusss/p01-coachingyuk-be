@@ -3,38 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\APIResponse;
-use App\Http\Requests\Activity\ActivityDestroyRequest;
-use App\Http\Requests\Activity\ActivityGetRequest;
-use App\Http\Requests\Activity\ActivityStoreRequest;
-use App\Http\Requests\Activity\ActivityToggleLikedRequest;
-use App\Http\Requests\Activity\ActivityUpdateRequest;
+use App\Http\Requests\Event\EventDestroyRequest;
+use App\Http\Requests\Event\EventGetRequest;
+use App\Http\Requests\Event\EventStoreRequest;
+use App\Http\Requests\Event\EventUpdateRequest;
 
-class ActivityController extends Controller
+class EventController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/activities",
-     *     tags={"Activity"},
-     *     operationId="GetActivities",
-     *     summary="Get list of Activity",
+     *     path="/api/events",
+     *     tags={"Event"},
+     *     operationId="GetEvents",
+     *     summary="Get list of events",
      *     description="",
      *     @OA\Parameter(ref="#/components/parameters/pagination-page"),
      *     @OA\Parameter(ref="#/components/parameters/pagination-per-page"),
      *     @OA\Parameter(ref="#/components/parameters/pagination-sort-by"),
      *     @OA\Parameter(ref="#/components/parameters/pagination-sort-dir"),
      *     @OA\Parameter(
-     *         name="topic_id",
+     *         name="coach_id",
      *         in="query",
-     *         description="Topic Id of Activities to return",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="user_id",
-     *         in="query",
-     *         description="User Id of Activities to return",
+     *         description="Coach id of events to return",
      *         required=false,
      *         @OA\Schema(
      *             type="integer"
@@ -45,7 +35,7 @@ class ActivityController extends Controller
      *         description="Successful operation",
      *         @OA\Schema(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/User")
+     *             @OA\Items(ref="#/components/schemas/Event")
      *         ),
      *     ),
      *     @OA\Response(
@@ -57,36 +47,35 @@ class ActivityController extends Controller
      *     }
      * )
      */
-    public function index(ActivityGetRequest $request)
+    public function index(EventGetRequest $request)
     {
         $filter = [
             'page' => $request->page ?? 1,
             'per_page' => $request->per_page ?? 10,
             'sort_by' => $request->sort_by ?? 'created_at',
             'sort_dir' => $request->sort_dir ?? 'desc',
-            'topic_id' => $request->topic_id ?? null,
-            'user_id' => $request->user_id ?? null,
+            'coach_id' => $request->coach_id ?? null,
             'id' => $request->id ?? null
         ];
-        $records = app('GetActivity')->execute($filter);
+        $records = app('GetEvent')->execute($filter);
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/activities/{id}",
-     *     tags={"Activity"},
-     *     operationId="GetActivity",
-     *     summary="Get Activity by id",
+     *     path="/api/events/{id}",
+     *     tags={"Event"},
+     *     operationId="GetEvent",
+     *     summary="Get event by id",
      *     description="",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="Id of Activities to return",
+     *         description="id of event to return",
      *         required=true,
      *         @OA\Schema(
-     *             type="integer"
+     *             type="string"
      *         )
      *     ),
      *     @OA\Response(
@@ -94,7 +83,7 @@ class ActivityController extends Controller
      *         description="Successful operation",
      *         @OA\Schema(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Activity")
+     *             @OA\Items(ref="#/components/schemas/Event")
      *         ),
      *     ),
      *     @OA\Response(
@@ -110,25 +99,25 @@ class ActivityController extends Controller
      *     }
      * )
      */
-    public function show(ActivityGetRequest $request)
+    public function show(EventGetRequest $request)
     {
         return $this->index($request);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/activities",
-     *     tags={"Activity"},
-     *     operationId="PostActivity",
-     *     summary="Store Activity to system",
+     *     path="/api/events",
+     *     tags={"Event"},
+     *     operationId="PostEvent",
+     *     summary="Store event to system",
      *     description="",
      *     @OA\RequestBody(
-     *         description="Activity store request object",
+     *         description="Event store request object",
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/ActivityStoreRequest"),
+     *         @OA\JsonContent(ref="#/components/schemas/EventStoreRequest"),
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
-     *             @OA\Schema(ref="#/components/schemas/ActivityStoreRequest"),
+     *             @OA\Schema(ref="#/components/schemas/EventStoreRequest"),
      *         )
      *     ),
      *     @OA\Response(
@@ -136,7 +125,7 @@ class ActivityController extends Controller
      *         description="Successful operation",
      *         @OA\Schema(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Activity")
+     *             @OA\Items(ref="#/components/schemas/Event")
      *         ),
      *     ),
      *     @OA\Response(
@@ -152,36 +141,36 @@ class ActivityController extends Controller
      *     }
      * )
      */
-    public function store(ActivityStoreRequest $request)
+    public function store(EventStoreRequest $request)
     {
-        $records = app('StoreActivity')->execute($request->all());
+        $records = app('StoreEvent')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
 
     /**
      * @OA\Put(
-     *     path="/api/activities/{id}",
-     *     tags={"Activity"},
-     *     operationId="PutActivity",
-     *     summary="Update Activity in system",
+     *     path="/api/events/{id}",
+     *     tags={"Event"},
+     *     operationId="PutEvent",
+     *     summary="Update event in system",
      *     description="",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="Id of Activities to return",
+     *         description="id of event to update",
      *         required=true,
      *         @OA\Schema(
-     *             type="integer"
+     *             type="string"
      *         )
      *     ),
      *     @OA\RequestBody(
-     *         description="Activity update request object",
+     *         description="Event update request object",
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/ActivityUpdateRequest"),
+     *         @OA\JsonContent(ref="#/components/schemas/EventUpdateRequest"),
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
-     *             @OA\Schema(ref="#/components/schemas/ActivityUpdateRequest"),
+     *             @OA\Schema(ref="#/components/schemas/EventUpdateRequest"),
      *         )
      *     ),
      *     @OA\Response(
@@ -189,7 +178,7 @@ class ActivityController extends Controller
      *         description="Successful operation",
      *         @OA\Schema(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Activity")
+     *             @OA\Items(ref="#/components/schemas/Event")
      *         ),
      *     ),
      *     @OA\Response(
@@ -205,27 +194,27 @@ class ActivityController extends Controller
      *     }
      * )
      */
-    public function update(ActivityUpdateRequest $request)
+    public function update(EventUpdateRequest $request)
     {
-        $records = app('UpdateActivity')->execute($request->all());
+        $records = app('UpdateEvent')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
 
     /**
      * @OA\Delete(
-     *     path="/api/activities/{id}",
-     *     tags={"Activity"},
-     *     operationId="DeleteActivity",
-     *     summary="Delete Activity in system",
+     *     path="/api/events/{id}",
+     *     tags={"Event"},
+     *     operationId="DeleteEvent",
+     *     summary="Delete event in system",
      *     description="",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="Id of Activities to return",
+     *         description="id of event to update",
      *         required=true,
      *         @OA\Schema(
-     *             type="integer"
+     *             type="string"
      *         )
      *     ),
      *     @OA\Response(
@@ -233,7 +222,7 @@ class ActivityController extends Controller
      *         description="Successful operation",
      *         @OA\Schema(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Activity")
+     *             @OA\Items(ref="#/components/schemas/Event")
      *         ),
      *     ),
      *     @OA\Response(
@@ -249,58 +238,9 @@ class ActivityController extends Controller
      *     }
      * )
      */
-    public function destroy(ActivityDestroyRequest $request)
+    public function destroy(EventDestroyRequest $request)
     {
-        $records = app('DestroyActivity')->execute($request->all());
-        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
-        return APIResponse::json($records, $code);
-    }
-
-    /**
-     * @OA\Post(
-     *     path="/api/activities/toggle-liked",
-     *     tags={"Activity"},
-     *     operationId="ToggleLikedActivity",
-     *     summary="Add/Remove user's liked activities in system",
-     *     description="",
-     *     @OA\RequestBody(
-     *         description="Activity toggle helpful request object",
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/ActivityToggleLikedRequest"),
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(ref="#/components/schemas/ActivityToggleLikedRequest"),
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful operation",
-     *         @OA\Schema(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Activity")
-     *         ),
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthorized",
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Unprocessable Entity",
-     *     ),
-     *     security={
-     *         {"bearerAuth": {}}
-     *     }
-     * )
-     */
-    public function toggleLiked(ActivityToggleLikedRequest $request)
-    {
-        $data = [
-            'activity_id' => $request->activity_id ?? null,
-            'id' => $request->id ?? null
-        ];
-
-        $records = app('ToggleLikedActivity')->execute($data);
+        $records = app('DestroyEvent')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }

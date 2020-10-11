@@ -27,7 +27,7 @@ class CategoryController extends Controller
      *         description="Creator user id of categories to return",
      *         required=false,
      *         @OA\Schema(
-     *             type="int"
+     *             type="integer"
      *         )
      *     ),
      *     @OA\Response(
@@ -99,7 +99,7 @@ class CategoryController extends Controller
      *     }
      * )
      */
-    public function show(AnswerGetRequest $request)
+    public function show(CategoryGetRequest $request)
     {
         return $this->index($request);
     }
