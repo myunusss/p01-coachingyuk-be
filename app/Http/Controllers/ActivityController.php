@@ -6,7 +6,7 @@ use App\Helpers\APIResponse;
 use App\Http\Requests\Activity\ActivityDestroyRequest;
 use App\Http\Requests\Activity\ActivityGetRequest;
 use App\Http\Requests\Activity\ActivityStoreRequest;
-use App\Http\Requests\Activity\ActivityToggleHelpfulRequest;
+use App\Http\Requests\Activity\ActivityToggleLikedRequest;
 use App\Http\Requests\Activity\ActivityUpdateRequest;
 
 class ActivityController extends Controller
@@ -252,6 +252,55 @@ class ActivityController extends Controller
     public function destroy(ActivityDestroyRequest $request)
     {
         $records = app('DestroyActivity')->execute($request->all());
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
+        return APIResponse::json($records, $code);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/activities/toggle-liked",
+     *     tags={"Activity"},
+     *     operationId="ToggleLikedActivity",
+     *     summary="Add/Remove user's liked activities in system",
+     *     description="",
+     *     @OA\RequestBody(
+     *         description="Activity toggle helpful request object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/ActivityToggleLikedRequest"),
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(ref="#/components/schemas/ActivityToggleLikedRequest"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Activity")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function toggleLiked(ActivityToggleLikedRequest $request)
+    {
+        $data = [
+            'activity_id' => $request->activity_id ?? null,
+            'id' => $request->id ?? null
+        ];
+
+        $records = app('ToggleLikedActivity')->execute($data);
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }

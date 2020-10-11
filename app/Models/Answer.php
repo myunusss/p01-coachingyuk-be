@@ -82,6 +82,7 @@ class Answer extends DefaultModel
             'App\Models\User',
             'user_helpful_answers'
         )
+        ->whereNull('user_helpful_answers.deleted_at')
         ->withTimestamps();
     }
 }

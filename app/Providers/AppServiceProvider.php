@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('DestroyActivity', 'App\Services\ActivityService\DestroyActivity');
         $this->registerService('GetActivity', 'App\Services\ActivityService\GetActivity');
         $this->registerService('StoreActivity', 'App\Services\ActivityService\StoreActivity');
+        $this->registerService('ToggleLikedActivity', 'App\Services\ActivityService\ToggleLikedActivity');
         $this->registerService('UpdateActivity', 'App\Services\ActivityService\UpdateActivity');
 
         $this->registerService('DestroyAnswer', 'App\Services\AnswerService\DestroyAnswer');

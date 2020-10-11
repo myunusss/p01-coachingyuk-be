@@ -20,6 +20,16 @@ class Activity extends DefaultModel
     {
         return $this->hasMany('App\Models\ActivityReply');
     }
+
+    public function likedUsers()
+    {
+        return $this->belongsToMany(
+            'App\Models\User',
+            'user_liked_activities'
+        )
+        ->whereNull('user_liked_activities.deleted_at')
+        ->withTimestamps();
+    }
     
     public function topic()
     {

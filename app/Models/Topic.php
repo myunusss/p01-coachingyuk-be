@@ -68,6 +68,7 @@ class Topic extends DefaultModel
             'user_check_in_topics'
         )
         ->withPivot('date')
+        ->whereNull('user_check_in_topics.deleted_at')
         ->withTimestamps();
     }
 }

@@ -32,6 +32,7 @@ Route::group(['middleware' => 'response.time'], function () {
             'users' => 'UserController'
         ]);
 
+        Route::post('activities/toggle-liked', 'ActivityController@toggleLiked');
         Route::post('answers/toggle-helpful', 'AnswerController@toggleHelpful');
         Route::post('questions/follow', 'QuestionController@follow');
         Route::post('topics/join', 'TopicController@join');

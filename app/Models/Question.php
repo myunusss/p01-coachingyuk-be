@@ -57,6 +57,7 @@ class Question extends DefaultModel
             'App\Models\User',
             'user_followed_answers'
         )
+        ->whereNull('user_followed_answers.deleted_at')
         ->withTimestamps();
     }
 }

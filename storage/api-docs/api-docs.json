@@ -231,6 +231,48 @@
                 ]
             }
         },
+        "/api/activities/toggle-liked": {
+            "post": {
+                "tags": [
+                    "Activity"
+                ],
+                "summary": "Add/Remove user's liked activities in system",
+                "description": "",
+                "operationId": "ToggleLikedActivity",
+                "requestBody": {
+                    "description": "Activity toggle helpful request object",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActivityToggleLikedRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActivityToggleLikedRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/activity-replies": {
             "get": {
                 "tags": [
@@ -2263,6 +2305,14 @@
                 },
                 "type": "object"
             },
+            "ActivityToggleLikedRequest": {
+                "properties": {
+                    "activity_id": {
+                        "type": "int"
+                    }
+                },
+                "type": "object"
+            },
             "ActivityUpdateRequest": {
                 "properties": {
                     "topic_id": {
@@ -2615,7 +2665,7 @@
                 "description": "The direction of sorting for the result set, defaults to *desc*",
                 "required": false,
                 "schema": {
-                    "type": "integer",
+                    "type": "string",
                     "default": "desc"
                 }
             }

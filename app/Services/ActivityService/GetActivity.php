@@ -10,7 +10,11 @@ class GetActivity extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $query = Activity::with(['user'])->orderBy($dto['sort_by'], $dto['sort_dir']);
+        $query = Activity::with([
+            'user',
+            'activityReplies' => function ($query) {
+                return $query->with(['user']);
+            }])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['topic_id'] != null) {
             $query->where('topic_id', $dto['topic_id']);
@@ -40,8 +44,10 @@ class GetActivity extends DefaultService implements ServiceInterface
         $response = $query;
 
         $response->total_streaks = 0;
+        $response->total_likes = $query->likedUsers->count();
         $response->total_replies = $query->activityReplies->count();
         unset($newTopic->activityReplies);
+        unset($newTopic->likedUsers);
         
         return $response;
     }
