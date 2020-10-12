@@ -39,5 +39,6 @@ Route::group(['middleware' => 'response.time'], function () {
         Route::post('topics/join', 'TopicController@join');
         Route::post('topics/check-in', 'TopicController@checkIn');
         Route::post('users/become-coach', 'UserController@becomeCoach');
+        Route::post('users/follow-coach', 'UserController@followCoach');
     });
 });

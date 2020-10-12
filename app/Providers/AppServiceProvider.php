@@ -70,6 +70,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->registerService('BecomeCoachUser', 'App\Services\UserService\BecomeCoachUser');
         $this->registerService('DestroyUser', 'App\Services\UserService\DestroyUser');
+        $this->registerService('FollowCoachUser', 'App\Services\UserService\FollowCoachUser');
         $this->registerService('GetUser', 'App\Services\UserService\GetUser');
         $this->registerService('StoreUser', 'App\Services\UserService\StoreUser');
         $this->registerService('UpdateUser', 'App\Services\UserService\UpdateUser');

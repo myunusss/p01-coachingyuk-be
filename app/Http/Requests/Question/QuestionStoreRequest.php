@@ -10,7 +10,7 @@ use App\Rules\ExistsId;
  *   schema="QuestionStoreRequest",
  *   @OA\Property(
  *     property="topic_id",
- *     type="int"
+ *     type="integer"
  *   ),
  *   @OA\Property(
  *     property="content",

@@ -270,4 +270,52 @@ class UserController extends Controller
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
         return APIResponse::json($records, $code);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/users/follow-coach",
+     *     tags={"User"},
+     *     operationId="FollowUser",
+     *     summary="Add/Remove user's followed coach user in system",
+     *     description="",
+     *     @OA\RequestBody(
+     *         description="User follow coach request object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/UserFollowCoachRequest"),
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(ref="#/components/schemas/UserFollowCoachRequest"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/User")
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function followCoach(UserFollowRequest $request)
+    {
+        $data = [
+            'coach_id' => $request->coach_id ?? null,
+        ];
+
+        $records = app('FollowCoachUser')->execute($data);
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = FAILURE_CODE;
+        return APIResponse::json($records, $code);
+    }
 }

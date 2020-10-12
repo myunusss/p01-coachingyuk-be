@@ -11,7 +11,7 @@ use App\Rules\ExistsSlug;
  *   schema="ActivityToggleLikedRequest",
  *   @OA\Property(
  *     property="activity_id",
- *     type="int"
+ *     type="integer"
  *   )
  * )
  */

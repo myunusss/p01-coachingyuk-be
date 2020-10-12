@@ -11,7 +11,7 @@ use App\Rules\ExistsSlug;
  *   schema="QuestionFollowRequest",
  *   @OA\Property(
  *     property="question_id",
- *     type="int"
+ *     type="integer"
  *   )
  * )
  */

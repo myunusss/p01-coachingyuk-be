@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Answer;
+namespace App\Http\Requests\Question;
 
 use App\Helpers\FormRequest;
 use App\Rules\ExistsId;
@@ -8,14 +8,14 @@ use App\Rules\ExistsSlug;
 
 /**
  * @OA\Schema(
- *   schema="AnswerToggleHelpfulRequest",
+ *   schema="UserFollowCoachRequest",
  *   @OA\Property(
- *     property="answer_id",
+ *     property="coach_id",
  *     type="integer"
  *   )
  * )
  */
-class AnswerToggleHelpfulRequest extends FormRequest
+class UserFollowCoachRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +35,7 @@ class AnswerToggleHelpfulRequest extends FormRequest
     public function rules()
     {
         return [
-            'answer_id' => ['required', new ExistsId('answers')],
+            'coach_id' => ['required', new ExistsId('users')],
         ];
     }
 

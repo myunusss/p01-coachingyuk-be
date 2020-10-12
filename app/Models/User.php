@@ -84,6 +84,30 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserFollowedQuestion');
     }
 
+    public function followers()
+    {
+        return $this->belongsToMany(
+            'App\Models\User',
+            'user_follow_coachs',
+            'coach_id',
+            'user_id'
+        )
+        ->whereNull('user_follow_coach.deleted_at')
+        ->withTimestamps();
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(
+            'App\Models\User',
+            'user_follow_coachs',
+            'user_id',
+            'coach_id'
+        )
+        ->whereNull('user_follow_coach.deleted_at')
+        ->withTimestamps();
+    }
+
     public function helpfulAnswers()
     {
         return $this->hasMany('App\Models\UserHelpfulAnswer');

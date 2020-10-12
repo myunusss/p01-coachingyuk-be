@@ -11,7 +11,7 @@ use App\Rules\ExistsSlug;
  *   schema="QuestionUpdateRequest",
  *   @OA\Property(
  *     property="topic_id",
- *     type="int"
+ *     type="integer"
  *   ),
  *   @OA\Property(
  *     property="content",
