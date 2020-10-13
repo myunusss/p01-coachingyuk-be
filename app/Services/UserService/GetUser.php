@@ -32,6 +32,8 @@ class GetUser extends DefaultService implements ServiceInterface
     {
         $response = $user;
 
+        $response->followers = $user->followers;
+        $response->following = $user->following;
         $response->total_check_in_topics = $user->checkInTopics->count();
         $response->total_days = Carbon::now()
             ->startOfDay()
