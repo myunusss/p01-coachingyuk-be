@@ -11,7 +11,7 @@ class GetUser extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $query = User::orderBy($dto['sort_by'], $dto['sort_dir']);
+        $query = User::with(['followers', 'following'])->orderBy($dto['sort_by'], $dto['sort_dir']);
 
         if ($dto['id'] != null) {
             $query->where('id', $dto['id']);
