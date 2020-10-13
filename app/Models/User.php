@@ -92,7 +92,7 @@ class User extends Authenticatable
             'coach_id',
             'user_id'
         )
-        ->whereNull('user_follow_coach.deleted_at')
+        ->whereNull('user_follow_coachs.deleted_at')
         ->withTimestamps();
     }
 
@@ -104,7 +104,7 @@ class User extends Authenticatable
             'user_id',
             'coach_id'
         )
-        ->whereNull('user_follow_coach.deleted_at')
+        ->whereNull('user_follow_coachs.deleted_at')
         ->withTimestamps();
     }
 
