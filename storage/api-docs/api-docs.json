@@ -2474,6 +2474,48 @@
                     }
                 ]
             }
+        },
+        "/api/users/follow-coach": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Add/Remove user's followed coach user in system",
+                "description": "",
+                "operationId": "FollowUser",
+                "requestBody": {
+                    "description": "User follow coach request object",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserFollowCoachRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserFollowCoachRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -2517,7 +2559,7 @@
             "ActivityToggleLikedRequest": {
                 "properties": {
                     "activity_id": {
-                        "type": "int"
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -2539,7 +2581,7 @@
             "AnswerStoreRequest": {
                 "properties": {
                     "question_id": {
-                        "type": "int"
+                        "type": "integer"
                     },
                     "content": {
                         "type": "string"
@@ -2550,7 +2592,7 @@
             "AnswerToggleHelpfulRequest": {
                 "properties": {
                     "answer_id": {
-                        "type": "int"
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -2558,7 +2600,7 @@
             "AnswerUpdateRequest": {
                 "properties": {
                     "question_id": {
-                        "type": "int"
+                        "type": "integer"
                     },
                     "content": {
                         "type": "string"
@@ -2677,7 +2719,7 @@
             "QuestionFollowRequest": {
                 "properties": {
                     "question_id": {
-                        "type": "int"
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -2685,7 +2727,7 @@
             "QuestionStoreRequest": {
                 "properties": {
                     "topic_id": {
-                        "type": "int"
+                        "type": "integer"
                     },
                     "content": {
                         "type": "string"
@@ -2696,7 +2738,7 @@
             "QuestionUpdateRequest": {
                 "properties": {
                     "topic_id": {
-                        "type": "int"
+                        "type": "integer"
                     },
                     "content": {
                         "type": "string"
@@ -2774,6 +2816,14 @@
                     },
                     "background": {
                         "type": "file"
+                    }
+                },
+                "type": "object"
+            },
+            "UserFollowCoachRequest": {
+                "properties": {
+                    "coach_id": {
+                        "type": "integer"
                     }
                 },
                 "type": "object"
