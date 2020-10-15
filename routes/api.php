@@ -18,8 +18,14 @@ Route::group(['middleware' => 'response.time'], function () {
     Route::post('register', 'AuthController@register');
     Route::get('login/{provider}', 'AuthController@redirectToProvider');
     Route::get('login/{provider}/callback', 'AuthController@handleProviderCallback');
+    Route::resource('topics', 'TopicController')->only(['index', 'show']);
+    Route::resource('users', 'UserController')->only(['index', 'show']);
+    
     
     Route::group(['middleware' => 'auth:api'], function () {
+        Route::resource('topics', 'TopicController')->except(['index', 'show']);
+        Route::resource('users', 'UserController')->except(['index', 'show']);
+
         Route::resources([
             'activities' => 'ActivityController',
             'activity-replies' => 'ActivityReplyController',
@@ -28,9 +34,7 @@ Route::group(['middleware' => 'response.time'], function () {
             'events' => 'EventController',
             'questions' => 'QuestionController',
             'replies' => 'ReplyController',
-            'roles' => 'RoleController',
-            'topics' => 'TopicController',
-            'users' => 'UserController'
+            'roles' => 'RoleController'
         ]);
 
         Route::post('activities/toggle-liked', 'ActivityController@toggleLiked');
