@@ -2,6 +2,7 @@
 
 namespace App\Services\FeedbackService;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Feedback;
 use App\Services\ServiceInterface;
 use App\Services\DefaultService;
