@@ -1,0 +1,26 @@
+<?php
+
+namespace DummyNameSpace;
+
+use App\Services\ServiceInterface;
+use App\Services\DefaultService;
+
+class DummyService extends DefaultService implements ServiceInterface
+{
+    public function process($dto)
+    {
+        // Buat proses di dalam sini
+
+        //Ganti true apabila terjadi kesalahan dalam proses
+        $this->results['error'] = null;
+
+        //Isi data hasil dalam proses
+        $this->results['data'] = null;
+
+        //Isi pesan hasil proses
+        $this->results['message'] = null;
+
+        //Optional
+        $this->results['pagination'] = null;
+    }
+}

@@ -20,6 +20,7 @@ Route::group(['middleware' => 'response.time'], function () {
     Route::get('login/{provider}/callback', 'AuthController@handleProviderCallback');
     Route::resource('topics', 'TopicController')->only(['index', 'show']);
     Route::resource('users', 'UserController')->only(['index', 'show']);
+    Route::resource('feedbacks', 'FeedbackController')->only(['index', 'show']);
     
     
     Route::group(['middleware' => 'auth:api'], function () {
@@ -32,6 +33,7 @@ Route::group(['middleware' => 'response.time'], function () {
             'answers' => 'AnswerController',
             'categories' => 'CategoryController',
             'events' => 'EventController',
+            // 'feedbacks' => 'FeedbackController',
             'questions' => 'QuestionController',
             'replies' => 'ReplyController',
             'roles' => 'RoleController'

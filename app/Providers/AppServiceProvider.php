@@ -45,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
         $this->registerService('StoreEvent', 'App\Services\EventService\StoreEvent');
         $this->registerService('UpdateEvent', 'App\Services\EventService\UpdateEvent');
 
+        $this->registerService('DestroyFeedback', 'App\Services\FeedbackService\DestroyFeedback');
+        $this->registerService('GetFeedback', 'App\Services\FeedbackService\GetFeedback');
+        $this->registerService('StoreFeedback', 'App\Services\FeedbackService\StoreFeedback');
+        $this->registerService('UpdateFeedback', 'App\Services\FeedbackService\UpdateFeedback');
+
         $this->registerService('DestroyQuestion', 'App\Services\QuestionService\DestroyQuestion');
         $this->registerService('FollowQuestion', 'App\Services\QuestionService\FollowQuestion');
         $this->registerService('GetQuestion', 'App\Services\QuestionService\GetQuestion');
