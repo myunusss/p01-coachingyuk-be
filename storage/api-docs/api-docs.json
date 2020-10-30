@@ -908,17 +908,22 @@
                 "summary": "Resend verification link to user email",
                 "description": "",
                 "operationId": "resendEmail",
-                "parameters": [
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "user's email to be used for verification",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "description": "Resend Email request object that needs to be sent verification email",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthResendEmailRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthResendEmailRequest"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -2917,6 +2922,20 @@
                         "type": "string"
                     },
                     "timezone": {
+                        "type": "string"
+                    },
+                    "callback_url": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthResendEmailRequest": {
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "callback_url": {
                         "type": "string"
                     }
                 },
