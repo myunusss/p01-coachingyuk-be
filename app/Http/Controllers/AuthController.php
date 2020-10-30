@@ -201,7 +201,7 @@ class AuthController extends Controller
     {
         $records = app('Verify')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = $records['code'];
-        return redirect($request->callback_url . '?data=' . base64_encode(json_encode($records['data'])));
+        return redirect($request->callback_url . '?data=' . json_encode($records['data']));
     }
 
     /**
