@@ -4,6 +4,19 @@ namespace App\Http\Requests\Auth;
 
 use App\Helpers\FormRequest;
 
+/**
+ * @OA\Schema(
+ *   schema="AuthResendEmailRequest",
+ *   @OA\Property(
+ *     property="email",
+ *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="callback_url",
+ *     type="string"
+ *   )
+ * )
+ */
 class AuthResendEmailRequest extends FormRequest
 {
     /**
@@ -24,7 +37,8 @@ class AuthResendEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required']
+            'email' => ['required'],
+            'callback_url' => ['required'],
         ];
     }
 

@@ -30,6 +30,10 @@ use App\Helpers\FormRequest;
  *   @OA\Property(
  *     property="timezone",
  *     type="string"
+ *   ),
+ *   @OA\Property(
+ *     property="callback_url",
+ *     type="string"
  *   )
  * )
  */
@@ -59,6 +63,7 @@ class AuthRegisterRequest extends FormRequest
             'email' => ['required', 'email'],
             'password' => ['required'],
             'timezone' => ['required'],
+            'callback_url' => ['required'],
         ];
     }
 

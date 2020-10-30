@@ -20,7 +20,7 @@ class ResendVerificationEmail extends DefaultService implements ServiceInterface
             return;
         }
 
-        Mail::to($user->email)->send(new VerifyEmail($user));
+        Mail::to($user->email)->send(new VerifyEmail($user, $dto['callback_url']));
 
         $this->results['data'] = $user;
 

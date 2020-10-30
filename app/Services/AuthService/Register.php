@@ -36,7 +36,7 @@ class Register extends DefaultService implements ServiceInterface
 
         $user->save();
 
-        Mail::to($user->email)->send(new VerifyEmail($user));
+        Mail::to($user->email)->send(new VerifyEmail($user, $dto['callback_url']));
 
         $this->results['data'] = $user;
         $this->results['data']['token'] = $user->createToken('MyApp')->accessToken;

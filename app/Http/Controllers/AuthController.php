@@ -201,7 +201,7 @@ class AuthController extends Controller
     {
         $records = app('Verify')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = $records['code'];
-        return redirect(env('WEB_VERIFY_CALLBACK') . '?data=' . json_encode($records['data']));
+        return redirect($request->callback_url . '?data=' . json_encode($records['data']));
     }
 
     /**
@@ -211,13 +211,13 @@ class AuthController extends Controller
      *     operationId="resendEmail",
      *     summary="Resend verification link to user email",
      *     description="",
-     *     @OA\Parameter(
-     *         name="email",
-     *         in="query",
-     *         description="user's email to be used for verification",
+     *     @OA\RequestBody(
+     *         description="Resend Email request object that needs to be sent verification email",
      *         required=true,
-     *         @OA\Schema(
-     *             type="string"
+     *         @OA\JsonContent(ref="#/components/schemas/AuthResendEmailRequest"),
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(ref="#/components/schemas/AuthResendEmailRequest"),
      *         )
      *     ),
      *     @OA\Response(

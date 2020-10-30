@@ -31,10 +31,10 @@ class VerifyEmail extends Mailable
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $callbackUrl)
     {
         $this->user = $user;
-        $this->url = route('verify', ['token' => md5($user->id)]);
+        $this->url = route('verify', ['token' => md5($user->id), 'callback_url' => $callbackUrl]);
     }
 
     /**
