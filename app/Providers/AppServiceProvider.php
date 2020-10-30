@@ -14,8 +14,10 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerService('Login', 'App\Services\AuthService\Login');
-        $this->registerService('Register', 'App\Services\AuthService\Register');
         $this->registerService('ProviderLogin', 'App\Services\AuthService\ProviderLogin');
+        $this->registerService('Register', 'App\Services\AuthService\Register');
+        $this->registerService('ResendVerificationEmail', 'App\Services\AuthService\ResendVerificationEmail');
+        $this->registerService('Verify', 'App\Services\AuthService\Verify');
 
         $this->registerService('DestroyActivityReply', 'App\Services\ActivityReplyService\DestroyActivityReply');
         $this->registerService('GetActivityReply', 'App\Services\ActivityReplyService\GetActivityReply');

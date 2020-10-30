@@ -869,6 +869,68 @@
                 ]
             }
         },
+        "/api/verify": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Verify user email so user can log in to the system",
+                "description": "",
+                "operationId": "verify",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Token sent to email used for verification",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/resend-email": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Resend verification link to user email",
+                "description": "",
+                "operationId": "resendEmail",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "user's email to be used for verification",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/categories": {
             "get": {
                 "tags": [

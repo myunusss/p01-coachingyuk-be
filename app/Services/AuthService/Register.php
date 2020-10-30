@@ -2,9 +2,10 @@
 
 namespace App\Services\AuthService;
 
+use Illuminate\Support\Facades\Mail;
 use App\Services\ServiceInterface;
 use App\Services\DefaultService;
-
+use App\Mail\VerifyEmail;
 use App\Models\Role;
 use App\Models\User;
 
@@ -34,6 +35,8 @@ class Register extends DefaultService implements ServiceInterface
         $this->prepareAuditInsert($user);
 
         $user->save();
+
+        Mail::to($user->email)->send(new VerifyEmail($user));
 
         $this->results['data'] = $user;
         $this->results['data']['token'] = $user->createToken('MyApp')->accessToken;

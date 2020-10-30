@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Helpers\APIResponse;
 use App\Http\Requests\Auth\AuthLoginRequest;
 use App\Http\Requests\Auth\AuthRegisterRequest;
+use App\Http\Requests\Auth\AuthResendEmailRequest;
+use App\Http\Requests\Auth\AuthVerifyRequest;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
@@ -164,5 +166,77 @@ class AuthController extends Controller
 
         $records = app('ProviderLogin')->execute($data);
         return redirect(env('WEB_CALLBACK') . '?token=' . $records['data']['token']);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/verify",
+     *     tags={"Auth"},
+     *     operationId="verify",
+     *     summary="Verify user email so user can log in to the system",
+     *     description="",
+     *     @OA\Parameter(
+     *         name="token",
+     *         in="query",
+     *         description="Token sent to email used for verification",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/User")
+     *         ),
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function verify(AuthVerifyRequest $request)
+    {
+        $records = app('Verify')->execute($request->all());
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = $records['code'];
+        return redirect(env('WEB_VERIFY_CALLBACK'));
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/resend-email",
+     *     tags={"Auth"},
+     *     operationId="resendEmail",
+     *     summary="Resend verification link to user email",
+     *     description="",
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="user's email to be used for verification",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/User")
+     *         ),
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function resendEmail(AuthResendEmailRequest $request)
+    {
+        $records = app('ResendVerificationEmail')->execute($request->all());
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = $records['code'];
+        return APIResponse::json($records, $code);
     }
 }

@@ -19,6 +19,12 @@ class Login extends DefaultService implements ServiceInterface
             $this->results['message'] = 'User not found!';
             return;
         }
+        
+        if (!$user->hasVerifiedEmail()) {
+            $this->results['error'] = UNAUTHORIZED_CODE;
+            $this->results['message'] = 'User not verified!';
+            return;
+        }
 
         if (
             !Auth::attempt(['username' => $user['username'], 'password' => $dto['password']]) &&

@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'response.time'], function () {
     Route::post('login', 'AuthController@login');
-    Route::post('register', 'AuthController@register');
     Route::get('login/{provider}', 'AuthController@redirectToProvider');
     Route::get('login/{provider}/callback', 'AuthController@handleProviderCallback');
+    Route::post('register', 'AuthController@register');
+    Route::post('resend-email', 'AuthController@resendEmail')->name('resend-email');
+    Route::get('verify', 'AuthController@verify')->name('verify');
+
     Route::resource('topics', 'TopicController')->only(['index', 'show']);
     Route::resource('users', 'UserController')->only(['index', 'show']);
-    
     
     Route::group(['middleware' => 'auth:api'], function () {
         Route::resource('topics', 'TopicController')->except(['index', 'show']);
