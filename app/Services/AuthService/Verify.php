@@ -29,6 +29,7 @@ class Verify extends DefaultService implements ServiceInterface
         $user->save();
 
         $this->results['data'] = $user;
+        $this->results['data']['token'] = $user->createToken('MyApp')->accessToken;
 
         //Isi pesan hasil proses
         $this->results['message'] = 'User successfully verified';
