@@ -13,7 +13,7 @@ class Verify extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $user = User::where(DB::raw("MD5(id)"), $dto['token'])->first();
+        $user = User::with('role')->where(DB::raw("MD5(id)"), $dto['token'])->first();
         
         if ($user == null) {
             $this->results['error'] = true;
