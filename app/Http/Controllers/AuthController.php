@@ -239,4 +239,40 @@ class AuthController extends Controller
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = $records['code'];
         return APIResponse::json($records, $code);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/forgot-password",
+     *     tags={"Auth"},
+     *     operationId="forgotPassword",
+     *     summary="Send forgot password link to user email",
+     *     description="",
+     *     @OA\RequestBody(
+     *         description="Resend Email request object that needs to be sent forgot password email",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/AuthResendEmailRequest"),
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(ref="#/components/schemas/AuthResendEmailRequest"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/User")
+     *         ),
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function forgotPassword(AuthResendEmailRequest $request)
+    {
+        $records = app('ForgotPassword')->execute($request->all());
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = $records['code'];
+        return APIResponse::json($records, $code);
+    }
 }
