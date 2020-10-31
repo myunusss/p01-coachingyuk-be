@@ -936,6 +936,42 @@
                 ]
             }
         },
+        "/api/forgot-password": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Send forgot password link to user email",
+                "description": "",
+                "operationId": "forgotPassword",
+                "requestBody": {
+                    "description": "Resend Email request object that needs to be sent forgot password email",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthResendEmailRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthResendEmailRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/categories": {
             "get": {
                 "tags": [

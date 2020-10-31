@@ -18,6 +18,7 @@ Route::group(['middleware' => 'response.time'], function () {
     Route::get('login/{provider}', 'AuthController@redirectToProvider');
     Route::get('login/{provider}/callback', 'AuthController@handleProviderCallback');
     Route::post('register', 'AuthController@register');
+    Route::post('forgot-password', 'AuthController@forgotPassword')->name('forgot-password');
     Route::post('resend-email', 'AuthController@resendEmail')->name('resend-email');
     Route::get('verify', 'AuthController@verify')->name('verify');
 

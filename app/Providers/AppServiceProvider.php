@@ -13,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerService('ForgotPassword', 'App\Services\AuthService\ForgotPassword');
         $this->registerService('Login', 'App\Services\AuthService\Login');
         $this->registerService('ProviderLogin', 'App\Services\AuthService\ProviderLogin');
         $this->registerService('Register', 'App\Services\AuthService\Register');
