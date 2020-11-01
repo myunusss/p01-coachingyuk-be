@@ -7,6 +7,8 @@ use App\Services\ServiceInterface;
 use App\Services\DefaultService;
 use App\Mail\ForgotPasswordEmail;
 use App\Models\User;
+use Carbon\Carbon;
+use JWTAuth;
 
 class ForgotPassword extends DefaultService implements ServiceInterface
 {
@@ -20,10 +22,13 @@ class ForgotPassword extends DefaultService implements ServiceInterface
             return;
         }
 
+        $user->reset_password_token = $user->createToken('ResetPassword')->accessToken;
+        $user->save();
+
         Mail::to($user->email)->send(
             new ForgotPasswordEmail(
                 $user,
-                $user->createToken('MyApp')->accessToken,
+                $user->reset_password_token,
                 $dto['callback_url']
             )
         );

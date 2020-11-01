@@ -6,6 +6,7 @@ use App\Helpers\APIResponse;
 use App\Http\Requests\Auth\AuthLoginRequest;
 use App\Http\Requests\Auth\AuthRegisterRequest;
 use App\Http\Requests\Auth\AuthResendEmailRequest;
+use App\Http\Requests\Auth\AuthResetPasswordRequest;
 use App\Http\Requests\Auth\AuthVerifyRequest;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -272,6 +273,42 @@ class AuthController extends Controller
     public function forgotPassword(AuthResendEmailRequest $request)
     {
         $records = app('ForgotPassword')->execute($request->all());
+        ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = $records['code'];
+        return APIResponse::json($records, $code);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/reset-password",
+     *     tags={"Auth"},
+     *     operationId="resetPassword",
+     *     summary="Reset users password",
+     *     description="",
+     *     @OA\RequestBody(
+     *         description="Reset password request object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/AuthResetPasswordRequest"),
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(ref="#/components/schemas/AuthResetPasswordRequest"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/User")
+     *         ),
+     *     ),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     */
+    public function resetPassword(AuthResetPasswordRequest $request)
+    {
+        $records = app('ResetPassword')->execute($request->all());
         ( $records['error'] == null ) ? $code = SUCCESS_CODE : $code = $records['code'];
         return APIResponse::json($records, $code);
     }

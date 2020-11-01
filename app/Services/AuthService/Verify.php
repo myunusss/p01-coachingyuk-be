@@ -30,7 +30,7 @@ class Verify extends DefaultService implements ServiceInterface
 
         $this->results['data'] = $user;
         $this->results['data']['token'] = $user->createToken('MyApp')->accessToken;
-	$this->results['data']['callback_url'] = $dto['callback_url'];
+        $this->results['data']['callback_url'] = $dto['callback_url'];
         //Isi pesan hasil proses
         $this->results['message'] = 'User successfully verified';
     }

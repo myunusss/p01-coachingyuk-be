@@ -17,9 +17,10 @@ Route::group(['middleware' => 'response.time'], function () {
     Route::post('login', 'AuthController@login');
     Route::get('login/{provider}', 'AuthController@redirectToProvider');
     Route::get('login/{provider}/callback', 'AuthController@handleProviderCallback');
-    Route::post('register', 'AuthController@register');
     Route::post('forgot-password', 'AuthController@forgotPassword')->name('forgot-password');
+    Route::post('register', 'AuthController@register');
     Route::post('resend-email', 'AuthController@resendEmail')->name('resend-email');
+    Route::post('reset-password', 'AuthController@resetPassword')->name('reset-password');
     Route::get('verify', 'AuthController@verify')->name('verify');
 
     Route::resource('topics', 'TopicController')->only(['index', 'show']);
